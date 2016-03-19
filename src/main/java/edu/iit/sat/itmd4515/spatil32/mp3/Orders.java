@@ -7,13 +7,13 @@ package edu.iit.sat.itmd4515.spatil32.mp3;
 
 import java.util.Date;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -24,6 +24,11 @@ import javax.persistence.TemporalType;
 */
 @Entity
 @Table(name = "spatil32_Orders")
+@NamedQueries({
+    @NamedQuery(name = "Orders.seeAllOrders", query = "select o from Orders o"),
+    @NamedQuery(name = "Orders.findOrdersById", query = "select o from Orders o where o.orderId = :id"),
+})
+
 public class Orders 
 {
     @Id

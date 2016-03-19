@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -49,8 +50,9 @@ public class Customer
     private char isAdmin;
     @OneToMany(mappedBy = "customer")
     private List<Orders> orders = new ArrayList<Orders>();
-
-
+    @OneToOne(mappedBy = "customer")
+    private Feedback feedback;
+    
     public Customer() {
     }
 
@@ -66,6 +68,22 @@ public class Customer
         this.username = username;
         this.password = password;
         this.isAdmin = isAdmin;
+    }
+
+    public Customer(int customerId, String firstName, String lastName, int age, char gender, String address, String email, Date birthDate, String phoneNo, String username, String password, char isAdmin, Feedback feedback) {
+        this.customerId = customerId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.gender = gender;
+        this.address = address;
+        this.email = email;
+        this.birthDate = birthDate;
+        this.phoneNo = phoneNo;
+        this.username = username;
+        this.password = password;
+        this.isAdmin = isAdmin;
+        this.feedback = feedback;
     }
 
     
@@ -154,14 +172,22 @@ public class Customer
         this.isAdmin = isAdmin;
     }    
 
-    @Override
-    public String toString() {
-        return "Customer Id = " + customerId + ", First Name = " + firstName + ", Last Name = " + lastName + ", Age = " + age + ", Gender = " + gender + ", Address = " + address + ", Email = " + email + ", Birth Date = " + birthDate + ", Phone No = " + phoneNo + ", username = " + username + ", password = " + password + ", isAdmin = " + isAdmin + '}';
-    }
     public List<Orders> getOrders() {
         return orders;
     }
     public void setOrders(List<Orders> orders) {
         this.orders = orders;
     }
+    public Feedback getFeedback() {
+        return feedback;
+    }
+    public void setFeedback(Feedback feedback) {
+        this.feedback = feedback;
+    }
+    
+    @Override
+    public String toString() {
+        return "Customer Id = " + customerId + ", First Name = " + firstName + ", Last Name = " + lastName + ", Age = " + age + ", Gender = " + gender + ", Address = " + address + ", Email = " + email + ", Birth Date = " + birthDate + ", Phone No = " + phoneNo + ", username = " + username + ", password = " + password + ", isAdmin = " + isAdmin + '}';
+    }
+
 }

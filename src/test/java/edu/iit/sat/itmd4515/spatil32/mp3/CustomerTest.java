@@ -37,7 +37,7 @@ public class CustomerTest
     {
         System.out.println("Inside @BeforeClass tag for CustomerTest class");
         entityManagerFactory = Persistence.createEntityManagerFactory("spatil32PU");
-        System.err.println("entityManagerFactory created..");
+        System.out.println("entityManagerFactory created..");
     }
     
     @Before
@@ -56,18 +56,22 @@ public class CustomerTest
         Orders order2 = new Orders(newCustomer, 6000, new Date());
         newCustomer.getOrders().add(order1);
         newCustomer.getOrders().add(order2);
-        
+        Feedback feedback = new Feedback(newCustomer, new Date(), "Good Clothes", 7);
+        newCustomer.setFeedback(feedback);
         entityTransaction.begin();
         entityManager.persist(newCustomer);
         entityManager.persist(order1);
         entityManager.persist(order2);
+        entityManager.persist(feedback);
         entityTransaction.commit();
         Assert.assertNotNull(newCustomer.getCustomerId());
         Assert.assertNotNull(order1.getOrderId());
         Assert.assertNotNull(order2.getOrderId());
+        Assert.assertNotNull(feedback.getFeedbackId());
         System.out.println("Shreyas persisted");
         System.out.println("A new customer with id " + newCustomer.getCustomerId() + " is persisted to spatil32_Customer table." );
-        System.out.println("New orders are persisted to Orders table with CustomerId " + newCustomer.getCustomerId() + " as foreign key constraint.");        
+        System.out.println("New orders are persisted to Orders table with CustomerId " + newCustomer.getCustomerId() + " as foreign key constraint.");
+        System.out.println("A new feedback is persisted with customer id " + feedback.getCustomer().getCustomerId() + " as foreign key constraint.");
     }
     
     
@@ -106,17 +110,20 @@ public class CustomerTest
         Orders order2 = new Orders(newCustomer, 1000, new Date());
         newCustomer.getOrders().add(order1);
         newCustomer.getOrders().add(order2);
-        
+        Feedback feedback = new Feedback(newCustomer, new Date(), "Good Products", 8);
+        newCustomer.setFeedback(feedback);
         entityTransaction.begin();
         entityManager.persist(newCustomer);
         entityManager.persist(order1);
         entityManager.persist(order2);
+        entityManager.persist(feedback);
         entityTransaction.commit();
         
         Assert.assertNotNull(newCustomer.getCustomerId());
         System.out.println("Immanuel persisted");
         System.out.println("A new customer with id " + newCustomer.getCustomerId() + " is persisted to spatil32_Customer table." );
         System.out.println("New orders are persisted to Orders table with CustomerId " + newCustomer.getCustomerId() + " as foreign key constraint.");
+        System.out.println("A new feedback is persisted with customer id " + feedback.getCustomer().getCustomerId() + " as foreign key constraint.");
     }
     
     @Test
@@ -189,7 +196,30 @@ public class CustomerTest
         System.out.println("Customer with first name " + updateCustomer.getFirstName() + " is updated to " + updatedCustomer.getFirstName());
     }
     
-    
+    @Test
+    public void testDeleteCustomer()
+    {
+        System.out.println("IN DELETE CUSTOMER");
+        Customer deleteCustomer = entityManager.createNamedQuery("Customer.findCustomerByName", Customer.class).setParameter("name", "Immanuel").getSingleResult();
+        List<Orders> customerOrders = deleteCustomer.getOrders();
+        Feedback deleteFeedback = deleteCustomer.getFeedback();
+        for (Orders customerOrder : customerOrders) 
+        {
+            entityTransaction.begin();
+            entityManager.remove(customerOrder);
+            entityTransaction.commit();
+        }
+        entityTransaction.begin();
+        entityManager.remove(deleteFeedback);
+        entityManager.remove(deleteCustomer);
+        entityTransaction.commit();
+        
+        List<Customer> namedCustomers = entityManager.createNamedQuery("Customer.findCustomerByName", Customer.class).setParameter("name", "Immanuel").getResultList();
+        if (namedCustomers.isEmpty()) 
+        {
+            Assert.assertTrue("Customer with name " + deleteCustomer.getFirstName() + " deleted successfully", true);
+        }
+    }
     
     @After
     public void afterEachTestMethod()
