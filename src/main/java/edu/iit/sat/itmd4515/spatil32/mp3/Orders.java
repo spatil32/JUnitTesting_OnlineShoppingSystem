@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -28,30 +29,34 @@ public class Orders
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int orderId;
-    @OneToMany(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "customerId_fk")
-    private int customerId;
-    
+    private Customer customer;
     private int totalBillAmount;
-
     @Temporal(TemporalType.DATE)
     private Date deliveryDate;
 
     public Orders() {
     }
-
-    public Orders(int orderId, int customerId, int totalBillAmount, Date deliveryDate) {
-        this.orderId = orderId;
-        this.customerId = customerId;
+    
+    public Orders(int totalBillAmount, Date deliveryDate) {
         this.totalBillAmount = totalBillAmount;
         this.deliveryDate = deliveryDate;
     }
 
-    public Orders(int orderId, int totalBillAmount, Date deliveryDate) {
-        this.orderId = orderId;
+    public Orders(Customer customer, int totalBillAmount, Date deliveryDate) {
+        this.customer = customer;
         this.totalBillAmount = totalBillAmount;
         this.deliveryDate = deliveryDate;
     }
+
+    public Orders(int orderId, Customer customer, int totalBillAmount, Date deliveryDate) {
+        this.orderId = orderId;
+        this.customer = customer;
+        this.totalBillAmount = totalBillAmount;
+        this.deliveryDate = deliveryDate;
+    }
+
 
     /**
      * Get the value of orderId
@@ -66,23 +71,6 @@ public class Orders
         this.orderId = orderId;
     }
 
-    /**
-     * Get the value of customerId
-     *
-     * @return the value of customerId
-     */
-    public int getCustomerId() {
-        return customerId;
-    }
-
-    /**
-     * Set the value of customerId
-     *
-     * @param customerId new value of customerId
-     */
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
-    }
     public int getTotalBillAmount() {
         return totalBillAmount;
     }
@@ -96,8 +84,16 @@ public class Orders
         this.deliveryDate = deliveryDate;
     }
 
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
     @Override
     public String toString() {
-        return "Orders{" + "orderId=" + orderId + ", customerId=" + customerId + ", totalBillAmount=" + totalBillAmount + ", deliveryDate=" + deliveryDate + '}';
+        return "Orders{" + "orderId=" + orderId + ", totalBillAmount=" + totalBillAmount + ", deliveryDate=" + deliveryDate + '}';
     }
 }

@@ -3,6 +3,7 @@
   <persistence-unit name="spatil32PU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>edu.iit.sat.itmd4515.spatil32.mp3.Customer</class>
+    <class>edu.iit.sat.itmd4515.spatil32.mp3.Orders</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/itmd4515?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="itmd4515"/>

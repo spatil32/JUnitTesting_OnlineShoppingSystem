@@ -5,13 +5,16 @@
  */
 package edu.iit.sat.itmd4515.spatil32.mp3;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -24,7 +27,8 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "spatil32_Customer")
 @NamedQueries({
-    @NamedQuery(name = "Customer.seeAllCustomers", query = "select c from Customer c")
+    @NamedQuery(name = "Customer.seeAllCustomers", query = "select c from Customer c"),
+    @NamedQuery(name = "Customer.findCustomerByName", query = "select c from Customer c where c.firstName = :name")
 })
 public class Customer
 {
@@ -43,6 +47,9 @@ public class Customer
     private String username;
     private String password;
     private char isAdmin;
+    @OneToMany(mappedBy = "customer")
+    private List<Orders> orders = new ArrayList<Orders>();
+
 
     public Customer() {
     }
@@ -150,5 +157,11 @@ public class Customer
     @Override
     public String toString() {
         return "Customer Id = " + customerId + ", First Name = " + firstName + ", Last Name = " + lastName + ", Age = " + age + ", Gender = " + gender + ", Address = " + address + ", Email = " + email + ", Birth Date = " + birthDate + ", Phone No = " + phoneNo + ", username = " + username + ", password = " + password + ", isAdmin = " + isAdmin + '}';
+    }
+    public List<Orders> getOrders() {
+        return orders;
+    }
+    public void setOrders(List<Orders> orders) {
+        this.orders = orders;
     }
 }
