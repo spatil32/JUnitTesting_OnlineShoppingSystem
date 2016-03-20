@@ -49,10 +49,14 @@ public class Customer
     private String password;
     private char isAdmin;
     @OneToMany(mappedBy = "customer")
-    private List<Orders> orders = new ArrayList<Orders>();
+    private List<Orders> orders = new ArrayList<>();
     @OneToOne(mappedBy = "customer")
     private Feedback feedback;
-    
+
+    @OneToMany(mappedBy = "customer")
+    private List<Wishlist> wishlist = new ArrayList<>();
+
+
     public Customer() {
     }
 
@@ -85,6 +89,7 @@ public class Customer
         this.isAdmin = isAdmin;
         this.feedback = feedback;
     }
+
 
     
     /**
@@ -184,10 +189,17 @@ public class Customer
     public void setFeedback(Feedback feedback) {
         this.feedback = feedback;
     }
-    
+
     @Override
     public String toString() {
         return "Customer Id = " + customerId + ", First Name = " + firstName + ", Last Name = " + lastName + ", Age = " + age + ", Gender = " + gender + ", Address = " + address + ", Email = " + email + ", Birth Date = " + birthDate + ", Phone No = " + phoneNo + ", username = " + username + ", password = " + password + ", isAdmin = " + isAdmin + '}';
     }
 
+    public List<Wishlist> getWishlist() {
+        return wishlist;
+    }
+
+    public void setWishlist(List<Wishlist> wishlist) {
+        this.wishlist = wishlist;
+    }
 }

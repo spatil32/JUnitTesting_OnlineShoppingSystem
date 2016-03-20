@@ -5,6 +5,9 @@
     <class>edu.iit.sat.itmd4515.spatil32.mp3.Customer</class>
     <class>edu.iit.sat.itmd4515.spatil32.mp3.Orders</class>
     <class>edu.iit.sat.itmd4515.spatil32.mp3.Feedback</class>
+    <class>edu.iit.sat.itmd4515.spatil32.mp3.Basket</class>
+    <class>edu.iit.sat.itmd4515.spatil32.mp3.Products</class>
+    <class>edu.iit.sat.itmd4515.spatil32.mp3.Wishlist</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/itmd4515?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="itmd4515"/>

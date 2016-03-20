@@ -7,7 +7,6 @@ package edu.iit.sat.itmd4515.spatil32.mp3;
 
 import java.util.Date;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;

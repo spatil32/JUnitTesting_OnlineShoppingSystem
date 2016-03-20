@@ -5,6 +5,7 @@
  */
 package edu.iit.sat.itmd4515.spatil32.mp3;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -58,26 +59,50 @@ public class CustomerTest
         newCustomer.getOrders().add(order2);
         Feedback feedback = new Feedback(newCustomer, new Date(), "Good Clothes", 7);
         newCustomer.setFeedback(feedback);
+        Products product1 = new Products("Britannia", new Date(), 'K', 20, 5, 5, 2);
+        Products product2 = new Products("Nestle", new Date(), 'K', 30, 10, 7, 5);
+        Wishlist wishlist1 = new Wishlist(newCustomer, product1, new Date());
+        Wishlist wishlist2 = new Wishlist(newCustomer, product2, new Date());
+        newCustomer.getWishlist().add(wishlist1);
+        newCustomer.getWishlist().add(wishlist2);
+        //List<Products> newProducts = new ArrayList<>();
+        
+        //newProducts.add(product1);
+        //newProducts.add(product2);
+        //Basket newBasket = new Basket(newCustomer, new Date(), 2, 20);
+        //newCustomer.setBasket(newBasket);
+        //newCustomer.getBasket().setProducts(newProducts);
         entityTransaction.begin();
         entityManager.persist(newCustomer);
         entityManager.persist(order1);
         entityManager.persist(order2);
         entityManager.persist(feedback);
+        entityManager.persist(product1);
+        entityManager.persist(product2);
+        entityManager.persist(wishlist1);
+        entityManager.persist(wishlist2);
+        //entityManager.persist(newBasket);
         entityTransaction.commit();
         Assert.assertNotNull(newCustomer.getCustomerId());
         Assert.assertNotNull(order1.getOrderId());
         Assert.assertNotNull(order2.getOrderId());
         Assert.assertNotNull(feedback.getFeedbackId());
+        Assert.assertNotNull(product1.getProductId());
+        Assert.assertNotNull(product2.getProductId());
+        //Assert.assertNotNull(newBasket.getBasketId());
+        Assert.assertNotNull(wishlist1.getWishlistId());
+        Assert.assertNotNull(wishlist2.getWishlistId());
         System.out.println("Shreyas persisted");
         System.out.println("A new customer with id " + newCustomer.getCustomerId() + " is persisted to spatil32_Customer table." );
         System.out.println("New orders are persisted to Orders table with CustomerId " + newCustomer.getCustomerId() + " as foreign key constraint.");
         System.out.println("A new feedback is persisted with customer id " + feedback.getCustomer().getCustomerId() + " as foreign key constraint.");
+        System.out.println("A new product with is " + product1.getProductId() + " is persisted in product table.");
+        System.out.println("A new product with is " + product2.getProductId() + " is persisted in product table.");
+        //System.out.println("A new basket is persisted to Basket table with customer id  " + newBasket.getCustomer().getCustomerId() + " as foreign key constraint.");
+        System.out.println("A new wishlist is persisted with customer id " + newCustomer.getCustomerId() + " as foreign key constraint.");
     }
     
     
-    /**
-     * Inserts new customer 
-     */
     @Test
     public void testInsertCustomers()
     {
@@ -112,11 +137,22 @@ public class CustomerTest
         newCustomer.getOrders().add(order2);
         Feedback feedback = new Feedback(newCustomer, new Date(), "Good Products", 8);
         newCustomer.setFeedback(feedback);
+        Products product1 = new Products("Hair Dryer", new Date(), 'E', 1200, 10, 50, 35);
+        Products product2 = new Products("Juicer", new Date(), 'E', 800, 10, 10, 5);
+        Wishlist wishlist1 = new Wishlist(newCustomer, product1, new Date());
+        Wishlist wishlist2 = new Wishlist(newCustomer, product1, new Date());
+        newCustomer.getWishlist().add(wishlist1);
+        newCustomer.getWishlist().add(wishlist2);
+  
         entityTransaction.begin();
         entityManager.persist(newCustomer);
         entityManager.persist(order1);
         entityManager.persist(order2);
         entityManager.persist(feedback);
+        entityManager.persist(product1);
+        entityManager.persist(product2);
+        entityManager.persist(wishlist1);
+        entityManager.persist(wishlist2);
         entityTransaction.commit();
         
         Assert.assertNotNull(newCustomer.getCustomerId());
@@ -124,7 +160,9 @@ public class CustomerTest
         System.out.println("A new customer with id " + newCustomer.getCustomerId() + " is persisted to spatil32_Customer table." );
         System.out.println("New orders are persisted to Orders table with CustomerId " + newCustomer.getCustomerId() + " as foreign key constraint.");
         System.out.println("A new feedback is persisted with customer id " + feedback.getCustomer().getCustomerId() + " as foreign key constraint.");
+        System.out.println("A new wishlist is persisted to table with customer id " + newCustomer.getCustomerId() + " as foreign key constraint.");
     }
+
     
     @Test
     public void testReadAllCustomers()
@@ -141,7 +179,8 @@ public class CustomerTest
             System.out.println(customer.toString());
         }
     }
-    
+  
+    //comment hoti
 /*    
     @Test
     public void testFindCustomerByName()
@@ -209,6 +248,14 @@ public class CustomerTest
             entityManager.remove(customerOrder);
             entityTransaction.commit();
         }
+        List<Wishlist> deleteWishList = deleteCustomer.getWishlist();
+        for (Wishlist wishlist : deleteWishList)
+        {
+            entityTransaction.begin();
+            entityManager.remove(wishlist);
+            entityTransaction.commit();
+        }
+
         entityTransaction.begin();
         entityManager.remove(deleteFeedback);
         entityManager.remove(deleteCustomer);
