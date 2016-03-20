@@ -12,6 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -23,6 +25,11 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "spatil32_Feedback")
+@NamedQueries({
+    @NamedQuery(name = "Feedback.seeAllFeedbacks", query = "select f from Feedback f"),
+    @NamedQuery(name = "Feedback.findFeedbackById", query = "select f from Feedback f where f.feedbackId = :id")
+})
+
 public class Feedback 
 {
     @Id
