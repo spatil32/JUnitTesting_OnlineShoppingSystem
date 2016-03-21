@@ -16,6 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -28,6 +30,10 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "spatil32_Wishlist")
+@NamedQueries({
+    @NamedQuery(name = "Wishlist.seeAllWishlists", query = "select w from Wishlist w"),
+    @NamedQuery(name = "Wishlist.seeWishlistsByCustomerId", query = "select w from Wishlist w where w.customer.customerId = :id")
+})
 public class Wishlist 
 {
     @Id
