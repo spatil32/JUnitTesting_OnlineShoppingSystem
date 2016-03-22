@@ -56,6 +56,9 @@ public class Customer
     @OneToMany(mappedBy = "customer")
     private List<Wishlist> wishlist = new ArrayList<>();
 
+    @OneToOne(mappedBy = "customer")
+    private Basket basket;
+
 
     public Customer() {
     }
@@ -88,6 +91,21 @@ public class Customer
         this.password = password;
         this.isAdmin = isAdmin;
         this.feedback = feedback;
+    }
+
+    public Customer(String firstName, String lastName, int age, char gender, String address, String email, Date birthDate, String phoneNo, String username, String password, char isAdmin, Basket basket) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.gender = gender;
+        this.address = address;
+        this.email = email;
+        this.birthDate = birthDate;
+        this.phoneNo = phoneNo;
+        this.username = username;
+        this.password = password;
+        this.isAdmin = isAdmin;
+        this.basket = basket;
     }
 
 
@@ -201,5 +219,13 @@ public class Customer
 
     public void setWishlist(List<Wishlist> wishlist) {
         this.wishlist = wishlist;
+    }
+
+    public Basket getBasket() {
+        return basket;
+    }
+
+    public void setBasket(Basket basket) {
+        this.basket = basket;
     }
 }

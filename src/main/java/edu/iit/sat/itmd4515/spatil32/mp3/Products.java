@@ -42,10 +42,14 @@ public class Products
     @OneToMany(mappedBy = "product")
     private List<Wishlist> wishlist = new ArrayList<>();
 
+    @ManyToOne
+    @JoinColumn(name = "productId_fk")
+    private Basket basket;
+
+
+
     public Products() {
     }
-
-
 
     public Products(int productId, String productName, Date mfgDate, char category, int price, int discount, int totalQty, int availableQty) {
         this.productId = productId;
@@ -66,6 +70,17 @@ public class Products
         this.discount = discount;
         this.totalQty = totalQty;
         this.availableQty = availableQty;
+    }
+
+    public Products(String productName, Date mfgDate, char category, int price, int discount, int totalQty, int availableQty, Basket basket) {
+        this.productName = productName;
+        this.mfgDate = mfgDate;
+        this.category = category;
+        this.price = price;
+        this.discount = discount;
+        this.totalQty = totalQty;
+        this.availableQty = availableQty;
+        this.basket = basket;
     }
 
 
@@ -139,5 +154,13 @@ public class Products
     }
     public void setWishlist(List<Wishlist> wishlist) {
         this.wishlist = wishlist;
+    }
+
+    public Basket getBasket() {
+        return basket;
+    }
+
+    public void setBasket(Basket basket) {
+        this.basket = basket;
     }
 }
