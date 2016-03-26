@@ -29,10 +29,16 @@ public class OrdersTest
     private EntityManager entityManager;
     private EntityTransaction entityTransaction;
     private int orderId = 2;
+
+    /**
+     *
+     */
     public OrdersTest() {
     }
 
-
+    /**
+     *
+     */
     @BeforeClass
     public static void beforeEachClass()
     {
@@ -41,6 +47,9 @@ public class OrdersTest
         System.out.println("entityManagerFactory created..");
     }
     
+    /**
+     *
+     */
     @Before
     public void beforeEachTestMethod()
     {
@@ -67,6 +76,9 @@ public class OrdersTest
         }*/
     }
     
+    /**
+     *
+     */
     @Test
     public void testInsertOrders()
     {
@@ -92,6 +104,9 @@ public class OrdersTest
         }        
     }
     
+    /**
+     *
+     */
     @Test
     public void testReadAllOrders()
     {
@@ -139,6 +154,9 @@ public class OrdersTest
         }
     }
     
+    /**
+     *
+     */
     @Test
     public void testUpdateExistingOrder()
     {
@@ -217,7 +235,9 @@ public class OrdersTest
         System.out.println("Order with order id " + updateOrder2.getOrderId() + " is updated.");
     }
     
-    
+    /**
+     *
+     */
     @Test
     public void testDeleteOrdersById()
     {
@@ -258,12 +278,18 @@ public class OrdersTest
         System.out.println("All orders of customer with customer id " + newCustomer.getCustomerId() + " are deleted successfully.");
     }
     
+    /**
+     *
+     */
     @After
     public void afterEachTestMethod()
     {
         entityManager.close();
     }
     
+    /**
+     *
+     */
     @AfterClass
     public static void afterEachClass()
     {

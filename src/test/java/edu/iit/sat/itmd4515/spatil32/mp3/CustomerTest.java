@@ -30,9 +30,15 @@ public class CustomerTest
     private EntityManager entityManager;
     private EntityTransaction entityTransaction;
 
+    /**
+     *
+     */
     public CustomerTest() {
     }
     
+    /**
+     *
+     */
     @BeforeClass
     public static void beforeEachClass()
     {
@@ -41,6 +47,9 @@ public class CustomerTest
         System.out.println("entityManagerFactory created..");
     }
     
+    /**
+     *
+     */
     @Before
     public void beforeEachTestMethod()
     {
@@ -48,6 +57,9 @@ public class CustomerTest
         entityTransaction = entityManager.getTransaction();                
     }
     
+    /**
+     *
+     */
     @Test
     public void testInsertCustomerShoppingDetails()
     {
@@ -70,9 +82,10 @@ public class CustomerTest
         Products product4 = new Products("Chicago Tourism", new Date(), 'B', 200, 10, 20, 15);
 
         Basket newBasket = new Basket(new Date(), 5, 50, newCustomer);
+        newBasket.getProducts().add(product3);
+        newBasket.getProducts().add(product4);
         newCustomer.setBasket(newBasket);
-        //newCustomer.getBasket().getProducts().add(product3);
-        //newCustomer.getBasket().getProducts().add(product4);
+        
         entityTransaction.begin();
         entityManager.persist(newCustomer);
         entityManager.persist(order1);
@@ -105,7 +118,9 @@ public class CustomerTest
         System.out.println("A new wishlist is persisted with customer id " + newCustomer.getCustomerId() + " as foreign key constraint.");
     }
     
-    
+    /**
+     *
+     */
     @Test
     public void testInsertCustomers()
     {
@@ -130,6 +145,9 @@ public class CustomerTest
         Assert.assertNotNull(newCustomer3.getCustomerId());
     }
 
+    /**
+     *
+     */
     @Test
     public void testPersistTableData()
     {
@@ -146,12 +164,13 @@ public class CustomerTest
         Wishlist wishlist2 = new Wishlist(newCustomer, product1, new Date());
         newCustomer.getWishlist().add(wishlist1);
         newCustomer.getWishlist().add(wishlist2);
-        Basket newBasket = new Basket(new Date(), 5, 50, newCustomer);
-        newCustomer.setBasket(newBasket);
         Products product3 = new Products("Beginning J2EE", new Date(), 'B', 300, 10, 50, 20);
         Products product4 = new Products("Chicago Tourism", new Date(), 'B', 200, 10, 20, 15);
-        //newCustomer.getBasket().getProducts().add(product3);
-        //newCustomer.getBasket().getProducts().add(product4);
+        
+        Basket newBasket = new Basket(new Date(), 5, 50, newCustomer);
+        newBasket.getProducts().add(product3);
+        newBasket.getProducts().add(product4);
+        newCustomer.setBasket(newBasket);
   
         entityTransaction.begin();
         entityManager.persist(newCustomer);
@@ -176,7 +195,9 @@ public class CustomerTest
         System.out.println("A new basket is persisted to Basket table with customer id  " + newBasket.getCustomer().getCustomerId() + " as foreign key constraint.");
     }
 
-    
+    /**
+     *
+     */
     @Test
     public void testReadAllCustomers()
     {
@@ -217,7 +238,14 @@ public class CustomerTest
         System.out.println("_______________________________________________________________________");
     }
   */  
-    
+
+    /**
+     *
+     */
+  
+    /**
+     *
+     */
     @Test
     public void testUpdateExistingCustomer()
     {
@@ -248,6 +276,9 @@ public class CustomerTest
         System.out.println("Customer with first name " + updateCustomer.getFirstName() + " is updated to " + updatedCustomer.getFirstName());
     }
     
+    /**
+     *
+     */
     @Test
     public void testDeleteCustomer()
     {
@@ -269,6 +300,14 @@ public class CustomerTest
             entityTransaction.commit();
         }
         Basket deleteBasket = deleteCustomer.getBasket();
+        List<Products> basketProducts = deleteBasket.getProducts();
+        for (Products basketProduct : basketProducts) 
+        {
+            entityTransaction.begin();
+            entityManager.remove(basketProduct);
+            entityTransaction.commit();            
+        }
+        
         entityTransaction.begin();
         entityManager.remove(deleteFeedback);
         entityManager.remove(deleteBasket);
@@ -278,16 +317,23 @@ public class CustomerTest
         List<Customer> namedCustomers = entityManager.createNamedQuery("Customer.findCustomerByName", Customer.class).setParameter("name", "Immanuel").getResultList();
         if (namedCustomers.isEmpty()) 
         {
+            System.out.println("Customer with name " + deleteCustomer.getFirstName() + " deleted successfully");
             Assert.assertTrue("Customer with name " + deleteCustomer.getFirstName() + " deleted successfully", true);
         }
     }
     
+    /**
+     *
+     */
     @After
     public void afterEachTestMethod()
     {
         entityManager.close();
     }
     
+    /**
+     *
+     */
     @AfterClass
     public static void afterEachClass()
     {

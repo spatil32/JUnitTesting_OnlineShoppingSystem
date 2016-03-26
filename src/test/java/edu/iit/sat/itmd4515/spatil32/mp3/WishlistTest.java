@@ -29,9 +29,15 @@ public class WishlistTest
     private EntityManager entityManager;
     private EntityTransaction entityTransaction;
 
+    /**
+     *
+     */
     public WishlistTest() {
     }
 
+    /**
+     *
+     */
     @BeforeClass
     public static void beforeEachClass()
     {
@@ -40,6 +46,9 @@ public class WishlistTest
         System.out.println("entityManagerFactory created..");
     }
     
+    /**
+     *
+     */
     @Before
     public void beforeEachTestMethod()
     {
@@ -47,6 +56,9 @@ public class WishlistTest
         entityTransaction = entityManager.getTransaction();                
     }
 
+    /**
+     *
+     */
     @Test
     public void testInsertWishlist()
     {
@@ -91,6 +103,9 @@ public class WishlistTest
 
     }
 
+    /**
+     *
+     */
     @Test
     public void testReadAllWishlist()
     {
@@ -148,6 +163,9 @@ public class WishlistTest
         }
     }
 
+    /**
+     *
+     */
     @Test
     public void testUpdateExistingWishlist()
     {
@@ -203,6 +221,9 @@ public class WishlistTest
         System.out.println("Wishlist of customer with customer id " + newCustomer.getCustomerId() + " is updated successfully.");
     }
 
+    /**
+     *
+     */
     @Test
     public void testDeleteWishlistByCustomerId()
     {
@@ -239,12 +260,18 @@ public class WishlistTest
         System.out.println("Wishlist of customer with customer id "+ newCustomer.getCustomerId()+" is deleted successfully.");
     }
   
+    /**
+     *
+     */
     @After
     public void afterEachTestMethod()
     {
         entityManager.close();
     }
     
+    /**
+     *
+     */
     @AfterClass
     public static void afterEachClass()
     {

@@ -49,21 +49,38 @@ public class Wishlist
     @Temporal(TemporalType.DATE)
     private Date creationDate;
 
-
-
+    /**
+     *
+     */
     public Wishlist() {
     }
 
+    /**
+     *
+     * @param wishlistId
+     * @param creationDate
+     */
     public Wishlist(int wishlistId, Date creationDate) {
         this.wishlistId = wishlistId;
         this.creationDate = creationDate;
     }
 
+    /**
+     *
+     * @param customer
+     * @param creationDate
+     */
     public Wishlist(Customer customer, Date creationDate) {
         this.customer = customer;
         this.creationDate = creationDate;
     }
 
+    /**
+     *
+     * @param customer
+     * @param product
+     * @param creationDate
+     */
     public Wishlist(Customer customer, Products product, Date creationDate) {
         this.customer = customer;
         this.product = product;
@@ -87,15 +104,35 @@ public class Wishlist
     public void setWishlistId(int wishlistId) {
         this.wishlistId = wishlistId;
     }
+
+    /**
+     *
+     * @return
+     */
     public Date getCreationDate() {
         return creationDate;
     }
+
+    /**
+     *
+     * @param creationDate
+     */
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
+
+    /**
+     *
+     * @return
+     */
     public Customer getCustomer() {
         return customer;
     }
+
+    /**
+     *
+     * @param customer
+     */
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
@@ -104,9 +141,19 @@ public class Wishlist
     public String toString() {
         return "Wishlist{" + "wishlistId=" + wishlistId + ", customer=" + customer + ", creationDate=" + creationDate + '}';
     }
+
+    /**
+     *
+     * @return
+     */
     public Products getProduct() {
         return product;
     }
+
+    /**
+     *
+     * @param product
+     */
     public void setProduct(Products product) {
         this.product = product;
     }

@@ -45,9 +45,19 @@ public class Feedback
     private String description;
     private int rating;
 
+    /**
+     *
+     */
     public Feedback() {
     }
 
+    /**
+     *
+     * @param feedbackId
+     * @param feedbackDate
+     * @param description
+     * @param rating
+     */
     public Feedback(int feedbackId, Date feedbackDate, String description, int rating) {
         this.feedbackId = feedbackId;
         this.feedbackDate = feedbackDate;
@@ -55,6 +65,14 @@ public class Feedback
         this.rating = rating;
     }
 
+    /**
+     *
+     * @param feedbackId
+     * @param customer
+     * @param feedbackDate
+     * @param description
+     * @param rating
+     */
     public Feedback(int feedbackId, Customer customer, Date feedbackDate, String description, int rating) {
         this.feedbackId = feedbackId;
         this.customer = customer;
@@ -63,6 +81,13 @@ public class Feedback
         this.rating = rating;
     }
 
+    /**
+     *
+     * @param customer
+     * @param feedbackDate
+     * @param description
+     * @param rating
+     */
     public Feedback(Customer customer, Date feedbackDate, String description, int rating) {
         this.customer = customer;
         this.feedbackDate = feedbackDate;
@@ -90,28 +115,67 @@ public class Feedback
     public void setFeedbackId(int feedbackId) {
         this.feedbackId = feedbackId;
     }
+
+    /**
+     *
+     * @return
+     */
     public Date getFeedbackDate() {
         return feedbackDate;
     }
+
+    /**
+     *
+     * @param feedbackDate
+     */
     public void setFeedbackDate(Date feedbackDate) {
         this.feedbackDate = feedbackDate;
     }
+
+    /**
+     *
+     * @return
+     */
     public String getDescription() {
         return description;
     }
+
+    /**
+     *
+     * @param description
+     */
     public void setDescription(String description) {
         this.description = description;
     }
+
+    /**
+     *
+     * @return
+     */
     public int getRating() {
         return rating;
     }
+
+    /**
+     *
+     * @param rating
+     */
     public void setRating(int rating) {
         this.rating = rating;
     }
 
+    /**
+     *
+     * @return
+     */
     public Customer getCustomer() {
         return customer;
     }
+
+    /**
+     *
+     * @param customer
+     */
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }

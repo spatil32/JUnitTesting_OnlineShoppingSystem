@@ -29,9 +29,15 @@ public class FeedbackTest
     private EntityManager entityManager;
     private EntityTransaction entityTransaction;
 
+    /**
+     *
+     */
     public FeedbackTest() {
     }
 
+    /**
+     *
+     */
     @BeforeClass
     public static void beforeEachClass()
     {
@@ -40,6 +46,9 @@ public class FeedbackTest
         System.out.println("entityManagerFactory created..");
     }
     
+    /**
+     *
+     */
     @Before
     public void beforeEachTestMethod()
     {
@@ -59,6 +68,9 @@ public class FeedbackTest
 */
     }
     
+    /**
+     *
+     */
     @Test
     public void testInsertFeedback()
     {
@@ -84,6 +96,9 @@ public class FeedbackTest
        System.out.println("New feedback is persisted to Feedback table with customer Id " + newCustomer2.getCustomerId() + " as foreign key constraint.");
     }
 
+    /**
+     *
+     */
     @Test
     public void testReadAllFeedbacks()
     {
@@ -100,6 +115,9 @@ public class FeedbackTest
         }
     }
     
+    /**
+     *
+     */
     @Test
     public void testUpdateExistingFeedback()
     {
@@ -142,6 +160,9 @@ public class FeedbackTest
         System.out.println("Feedback with feedback id " + updateFeedback.getFeedbackId() + " is updated.");
     }
 
+    /**
+     *
+     */
     @Test
     public void testDeleteFeedbackById()
     {
@@ -168,13 +189,18 @@ public class FeedbackTest
         Assert.assertTrue(deletedFeedback.isEmpty());
     }
     
-    
+    /**
+     *
+     */
     @After
     public void afterEachTestMethod()
     {
         entityManager.close();
     }
     
+    /**
+     *
+     */
     @AfterClass
     public static void afterEachClass()
     {

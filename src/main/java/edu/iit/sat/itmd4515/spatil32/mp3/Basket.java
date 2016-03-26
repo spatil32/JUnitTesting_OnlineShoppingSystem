@@ -14,6 +14,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -40,15 +42,28 @@ public class Basket
     @OneToOne
     @JoinColumn(name = "customerId_fk")
     private Customer customer;
-/*
-    @OneToMany(mappedBy = "basket")
+
+    @ManyToMany
+    @JoinTable(
+            name = "spatil32_basket_products",
+            joinColumns = @JoinColumn(name = "BASKET_ID"),
+            inverseJoinColumns = @JoinColumn(name = "PRODUCT_ID")
+    )
     private List<Products> products = new ArrayList<>();
-*/
-    
-    
+
+    /**
+     *
+     */
     public Basket() {
     }
 
+    /**
+     *
+     * @param basketId
+     * @param shoppingDate
+     * @param numberOfItems
+     * @param pricePerUnit
+     */
     public Basket(int basketId, Date shoppingDate, int numberOfItems, int pricePerUnit) {
         this.basketId = basketId;
         this.shoppingDate = shoppingDate;
@@ -56,6 +71,13 @@ public class Basket
         this.pricePerUnit = pricePerUnit;
     }
 
+    /**
+     *
+     * @param shoppingDate
+     * @param numberOfItems
+     * @param pricePerUnit
+     * @param customer
+     */
     public Basket(Date shoppingDate, int numberOfItems, int pricePerUnit, Customer customer) {
         this.shoppingDate = shoppingDate;
         this.numberOfItems = numberOfItems;
@@ -84,29 +106,67 @@ public class Basket
     public void setBasketId(int basketId) {
         this.basketId = basketId;
     }
+
+    /**
+     *
+     * @return
+     */
     public Date getShoppingDate() {
         return shoppingDate;
     }
+
+    /**
+     *
+     * @param shoppingDate
+     */
     public void setShoppingDate(Date shoppingDate) {
         this.shoppingDate = shoppingDate;
     }
+
+    /**
+     *
+     * @return
+     */
     public int getNumberOfItems() {
         return numberOfItems;
     }
+
+    /**
+     *
+     * @param numberOfItems
+     */
     public void setNumberOfItems(int numberOfItems) {
         this.numberOfItems = numberOfItems;
     }
+
+    /**
+     *
+     * @return
+     */
     public int getPricePerUnit() {
         return pricePerUnit;
     }
+
+    /**
+     *
+     * @param pricePerUnit
+     */
     public void setPricePerUnit(int pricePerUnit) {
         this.pricePerUnit = pricePerUnit;
     }
 
+    /**
+     *
+     * @return
+     */
     public Customer getCustomer() {
         return customer;
     }
 
+    /**
+     *
+     * @param customer
+     */
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
@@ -119,4 +179,20 @@ public class Basket
         this.products = products;
     }
 */
+
+    /**
+     *
+     * @return
+     */
+    public List<Products> getProducts() {
+        return products;
+    }
+
+    /**
+     *
+     * @param products
+     */
+    public void setProducts(List<Products> products) {
+        this.products = products;
+    }
 }

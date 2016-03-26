@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -49,15 +50,26 @@ public class Products
     @OneToMany(mappedBy = "product")
     private List<Wishlist> wishlist = new ArrayList<>();
 
-    @ManyToOne
-    @JoinColumn(name = "productId_fk")
-    private Basket basket;
+    @ManyToMany(mappedBy = "products")
+    private List<Basket> basket;
 
-
-
+    /**
+     *
+     */
     public Products() {
     }
 
+    /**
+     *
+     * @param productId
+     * @param productName
+     * @param mfgDate
+     * @param category
+     * @param price
+     * @param discount
+     * @param totalQty
+     * @param availableQty
+     */
     public Products(int productId, String productName, Date mfgDate, char category, int price, int discount, int totalQty, int availableQty) {
         this.productId = productId;
         this.productName = productName;
@@ -69,6 +81,16 @@ public class Products
         this.availableQty = availableQty;
     }
 
+    /**
+     *
+     * @param productName
+     * @param mfgDate
+     * @param category
+     * @param price
+     * @param discount
+     * @param totalQty
+     * @param availableQty
+     */
     public Products(String productName, Date mfgDate, char category, int price, int discount, int totalQty, int availableQty) {
         this.productName = productName;
         this.mfgDate = mfgDate;
@@ -79,16 +101,6 @@ public class Products
         this.availableQty = availableQty;
     }
 
-    public Products(String productName, Date mfgDate, char category, int price, int discount, int totalQty, int availableQty, Basket basket) {
-        this.productName = productName;
-        this.mfgDate = mfgDate;
-        this.category = category;
-        this.price = price;
-        this.discount = discount;
-        this.totalQty = totalQty;
-        this.availableQty = availableQty;
-        this.basket = basket;
-    }
 
 
 
@@ -109,45 +121,115 @@ public class Products
     public void setProductId(int productId) {
         this.productId = productId;
     }
+
+    /**
+     *
+     * @return
+     */
     public String getProductName() {
         return productName;
     }
+
+    /**
+     *
+     * @param productName
+     */
     public void setProductName(String productName) {
         this.productName = productName;
     }
+
+    /**
+     *
+     * @return
+     */
     public Date getMfgDate() {
         return mfgDate;
     }
+
+    /**
+     *
+     * @param mfgDate
+     */
     public void setMfgDate(Date mfgDate) {
         this.mfgDate = mfgDate;
     }
+
+    /**
+     *
+     * @return
+     */
     public char getCategory() {
         return category;
     }
+
+    /**
+     *
+     * @param category
+     */
     public void setCategory(char category) {
         this.category = category;
     }
+
+    /**
+     *
+     * @return
+     */
     public int getPrice() {
         return price;
     }
+
+    /**
+     *
+     * @param price
+     */
     public void setPrice(int price) {
         this.price = price;
     }
+
+    /**
+     *
+     * @return
+     */
     public int getDiscount() {
         return discount;
     }
+
+    /**
+     *
+     * @param discount
+     */
     public void setDiscount(int discount) {
         this.discount = discount;
     }
+
+    /**
+     *
+     * @return
+     */
     public int getTotalQty() {
         return totalQty;
     }
+
+    /**
+     *
+     * @param totalQty
+     */
     public void setTotalQty(int totalQty) {
         this.totalQty = totalQty;
     }
+
+    /**
+     *
+     * @return
+     */
     public int getAvailableQty() {
         return availableQty;
     }
+
+    /**
+     *
+     * @param availableQty
+     */
     public void setAvailableQty(int availableQty) {
         this.availableQty = availableQty;
     }
@@ -156,18 +238,36 @@ public class Products
     public String toString() {
         return "Products{" + "productId=" + productId + ", productName=" + productName + ", mfgDate=" + mfgDate + ", category=" + category + ", price=" + price + ", discount=" + discount + ", totalQty=" + totalQty + ", availableQty=" + availableQty + '}';
     }
+
+    /**
+     *
+     * @return
+     */
     public List<Wishlist> getWishlist() {
         return wishlist;
     }
+
+    /**
+     *
+     * @param wishlist
+     */
     public void setWishlist(List<Wishlist> wishlist) {
         this.wishlist = wishlist;
     }
 
-    public Basket getBasket() {
+    /**
+     *
+     * @return
+     */
+    public List<Basket> getBasket() {
         return basket;
     }
 
-    public void setBasket(Basket basket) {
+    /**
+     *
+     * @param basket
+     */
+    public void setBasket(List<Basket> basket) {
         this.basket = basket;
     }
 }

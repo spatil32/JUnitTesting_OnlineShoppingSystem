@@ -29,9 +29,15 @@ public class ProductsTest
     private EntityManager entityManager;
     private EntityTransaction entityTransaction;
 
+    /**
+     *
+     */
     public ProductsTest() {
     }
 
+    /**
+     *
+     */
     @BeforeClass
     public static void beforeEachClass()
     {
@@ -40,6 +46,9 @@ public class ProductsTest
         System.out.println("entityManagerFactory created..");
     }
     
+    /**
+     *
+     */
     @Before
     public void beforeEachTestMethod()
     {
@@ -47,6 +56,9 @@ public class ProductsTest
         entityTransaction = entityManager.getTransaction();                
     }
     
+    /**
+     *
+     */
     @Test
     public void testInsertProduct()
     {
@@ -66,6 +78,9 @@ public class ProductsTest
        System.out.println("New product is persisted to Products table with product Id " + newProduct2.getProductId());
     }
 
+    /**
+     *
+     */
     @Test
     public void testReadAllProducts()
     {
@@ -97,6 +112,9 @@ public class ProductsTest
         }
     }
     
+    /**
+     *
+     */
     @Test
     public void testUpdateExistingFeedback()
     {
@@ -140,6 +158,9 @@ public class ProductsTest
         System.out.println("Product with product id " + newProduct1.getProductId() + " is updated.");
     }
 
+    /**
+     *
+     */
     @Test
     public void testDeleteFeedbackById()
     {
@@ -165,12 +186,18 @@ public class ProductsTest
         Assert.assertTrue(deletedProducts.isEmpty());
     }
     
+    /**
+     *
+     */
     @After
     public void afterEachTestMethod()
     {
         entityManager.close();
     }
     
+    /**
+     *
+     */
     @AfterClass
     public static void afterEachClass()
     {

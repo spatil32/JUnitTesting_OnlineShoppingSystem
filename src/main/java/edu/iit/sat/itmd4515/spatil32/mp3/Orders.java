@@ -41,20 +41,41 @@ public class Orders
     @Temporal(TemporalType.DATE)
     private Date deliveryDate;
 
+    /**
+     *
+     */
     public Orders() {
     }
     
+    /**
+     *
+     * @param totalBillAmount
+     * @param deliveryDate
+     */
     public Orders(int totalBillAmount, Date deliveryDate) {
         this.totalBillAmount = totalBillAmount;
         this.deliveryDate = deliveryDate;
     }
 
+    /**
+     *
+     * @param customer
+     * @param totalBillAmount
+     * @param deliveryDate
+     */
     public Orders(Customer customer, int totalBillAmount, Date deliveryDate) {
         this.customer = customer;
         this.totalBillAmount = totalBillAmount;
         this.deliveryDate = deliveryDate;
     }
 
+    /**
+     *
+     * @param orderId
+     * @param customer
+     * @param totalBillAmount
+     * @param deliveryDate
+     */
     public Orders(int orderId, Customer customer, int totalBillAmount, Date deliveryDate) {
         this.orderId = orderId;
         this.customer = customer;
@@ -72,27 +93,58 @@ public class Orders
         return orderId;
     }
 
+    /**
+     *
+     * @param orderId
+     */
     public void setOrderId(int orderId) {
         this.orderId = orderId;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getTotalBillAmount() {
         return totalBillAmount;
     }
+
+    /**
+     *
+     * @param totalBillAmount
+     */
     public void setTotalBillAmount(int totalBillAmount) {
         this.totalBillAmount = totalBillAmount;
     }
+
+    /**
+     *
+     * @return
+     */
     public Date getDeliveryDate() {
         return deliveryDate;
     }
+
+    /**
+     *
+     * @param deliveryDate
+     */
     public void setDeliveryDate(Date deliveryDate) {
         this.deliveryDate = deliveryDate;
     }
 
+    /**
+     *
+     * @return
+     */
     public Customer getCustomer() {
         return customer;
     }
 
+    /**
+     *
+     * @param customer
+     */
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
