@@ -20,7 +20,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
- *
+ * WishlistTest class contains functionality to persist Wishlist entity in database table with help of javax.persistence API's.
  * @author Dell
  */
 public class WishlistTest 
@@ -30,13 +30,13 @@ public class WishlistTest
     private EntityTransaction entityTransaction;
 
     /**
-     *
+     * parameterless constructor
      */
     public WishlistTest() {
     }
 
     /**
-     *
+     * before class, a new persistence unit with name spatil32PU will be created.
      */
     @BeforeClass
     public static void beforeEachClass()
@@ -47,7 +47,7 @@ public class WishlistTest
     }
     
     /**
-     *
+     * before starting test, entityManager and entityTransaction are instantiated.
      */
     @Before
     public void beforeEachTestMethod()
@@ -57,7 +57,7 @@ public class WishlistTest
     }
 
     /**
-     *
+     * Persists new wishlist with newly created products for newly created customer.
      */
     @Test
     public void testInsertWishlist()
@@ -100,11 +100,10 @@ public class WishlistTest
         Assert.assertNotNull(wishlist3.getWishlistId());
         Assert.assertNotNull(wishlist4.getWishlistId());
         System.out.println("A new wishlist is persisted with customer id " + newCustomer2.getCustomerId() + " as foreign key constraint.");
-
     }
 
     /**
-     *
+     *  Reads newly persisted wishlist details for newly persisted customers.
      */
     @Test
     public void testReadAllWishlist()
@@ -164,7 +163,7 @@ public class WishlistTest
     }
 
     /**
-     *
+     * Updates newly persisted wishlist.
      */
     @Test
     public void testUpdateExistingWishlist()
@@ -222,7 +221,7 @@ public class WishlistTest
     }
 
     /**
-     *
+     * deletes wishlist for a customer by finding him by ID
      */
     @Test
     public void testDeleteWishlistByCustomerId()
@@ -261,7 +260,7 @@ public class WishlistTest
     }
   
     /**
-     *
+     *  After each test, closes entity manager
      */
     @After
     public void afterEachTestMethod()
@@ -270,12 +269,11 @@ public class WishlistTest
     }
     
     /**
-     *
+     * after class, closes entityManagerFactory
      */
     @AfterClass
     public static void afterEachClass()
     {
         entityManagerFactory.close();
-    }
-    
+    }    
 }

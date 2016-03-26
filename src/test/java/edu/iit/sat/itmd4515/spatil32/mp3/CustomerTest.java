@@ -62,7 +62,7 @@ public class CustomerTest
     public void testInsertCustomerShoppingDetails() 
     {
         System.out.println("Persisting new customer");
-        Customer newCustomer = new Customer("Shreyas", "Patil", 25, 'M', "Pune", "Shreyas.Patil@gmail.com", new GregorianCalendar(1991, 5, 16).getTime(), "12546", "admin", "admin", 'Y');
+        Customer newCustomer = new Customer("Shreyas", "Patil", 25, 'M', "Pune", "Shreyas.Patil@gmail.com", new GregorianCalendar(1991, 5, 16).getTime(), "12546", "shreyas", "patil", 'N');
         Orders order1 = new Orders(newCustomer, 5000, new Date());
         Orders order2 = new Orders(newCustomer, 6000, new Date());
         newCustomer.getOrders().add(order1);

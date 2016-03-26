@@ -137,7 +137,6 @@ public class Customer
     }
 
     /**
-     * @param customerId indicates customer id
      * @param firstName indicates first name
      * @param lastName indicates last name
      * @param age indicates age
@@ -149,7 +148,7 @@ public class Customer
      * @param username indicates username
      * @param password indicates password
      * @param isAdmin indicates isadmin or customer
-     * @param basket indu=icates basket
+     * @param basket indicates basket
      */
     public Customer(String firstName, String lastName, int age, char gender, String address, String email, Date birthDate, String phoneNo, String username, String password, char isAdmin, Basket basket) {
         this.firstName = firstName;

@@ -31,13 +31,13 @@ public class OrdersTest
     private int orderId = 2;
 
     /**
-     *
+     * Parameterless constructor
      */
     public OrdersTest() {
     }
 
     /**
-     *
+     * before class, a new persistence unit with name spatil32PU will be created.
      */
     @BeforeClass
     public static void beforeEachClass()
@@ -48,36 +48,17 @@ public class OrdersTest
     }
     
     /**
-     *
+     * before starting test, entityManager and entityTransaction are instantiated.
      */
     @Before
     public void beforeEachTestMethod()
     {
         entityManager = entityManagerFactory.createEntityManager();
         entityTransaction = entityManager.getTransaction();                
-/*        
-        Customer newCustomer = new Customer("Uma", "Selvam", 30, 'F', "Chennai", "Uma.Selvam@gmail.com", new GregorianCalendar(1987, 1, 1).getTime(), "14967", "uma", "selvam", 'N');
-        Orders order1 = new Orders(newCustomer, 3000, new Date());
-        Orders order2 = new Orders(newCustomer, 7000, new Date());
-        newCustomer.getOrders().add(order1);
-        newCustomer.getOrders().add(order2);        
-        entityTransaction.begin();
-        entityManager.persist(newCustomer);
-        entityManager.persist(order1);
-        entityManager.persist(order2);
-        entityTransaction.commit();
-
-        Assert.assertNotNull(order1.getOrderId());
-        Assert.assertNotNull(order2.getOrderId());
-
-        for (Orders order : newCustomer.getOrders())
-        {
-            System.out.println("New order is persisted to Orders table with Order Id " + order.getOrderId());        
-        }*/
     }
     
     /**
-     *
+     * Persists new orders for new customer.
      */
     @Test
     public void testInsertOrders()
@@ -95,6 +76,7 @@ public class OrdersTest
         entityManager.persist(order2);
         entityTransaction.commit();
 
+        //asserts that new orders are persisted with positive order id.
         Assert.assertNotNull(order1.getOrderId());
         Assert.assertNotNull(order2.getOrderId());
 
@@ -105,7 +87,7 @@ public class OrdersTest
     }
     
     /**
-     *
+     * persists and reads all orders for newly persisted customer.
      */
     @Test
     public void testReadAllOrders()
@@ -130,6 +112,7 @@ public class OrdersTest
         entityManager.persist(order4);
         entityTransaction.commit();
 
+        //Asserts new orders are persisted.
         Assert.assertNotNull(order1.getOrderId());
         Assert.assertNotNull(order2.getOrderId());
         Assert.assertNotNull(order3.getOrderId());
@@ -155,7 +138,7 @@ public class OrdersTest
     }
     
     /**
-     *
+     * updates newly persisted orders for new customer.
      */
     @Test
     public void testUpdateExistingOrder()
@@ -206,6 +189,7 @@ public class OrdersTest
         System.out.println("__________________________________________________________________");
         
         Orders updatedOrder1 = entityManager.createNamedQuery("Orders.findOrdersById", Orders.class).setParameter("id", order1.getOrderId()).getSingleResult();
+        //asserts updated orders are equal to new values.
         Assert.assertEquals(updatedOrder1.getTotalBillAmount(), 10000);
         Assert.assertEquals(updatedOrder1.getDeliveryDate(), new GregorianCalendar(2016, 31, 3).getTime());
         System.out.println("Order with order id " + updateOrder1.getOrderId() + " is updated.");
@@ -230,13 +214,14 @@ public class OrdersTest
         System.out.println("__________________________________________________________________");
         
         Orders updatedOrder2 = entityManager.createNamedQuery("Orders.findOrdersById", Orders.class).setParameter("id", order2.getOrderId()).getSingleResult();
+        //asserts updated orders equal to new values.
         Assert.assertEquals(updatedOrder2.getTotalBillAmount(), 20000);
         Assert.assertEquals(updatedOrder2.getDeliveryDate(), new GregorianCalendar(2016, 30, 4).getTime());
         System.out.println("Order with order id " + updateOrder2.getOrderId() + " is updated.");
     }
     
     /**
-     *
+     * deletes newly persisted order for new customer.
      */
     @Test
     public void testDeleteOrdersById()
@@ -268,18 +253,20 @@ public class OrdersTest
         entityManager.remove(deleteOrder1);
         entityTransaction.commit();
         List<Orders> deletedOrder1 = entityManager.createNamedQuery("Orders.findOrdersById", Orders.class).setParameter("id", order1.getOrderId()).getResultList();
+        //asserts orders are deleted.
         Assert.assertTrue(deletedOrder1.isEmpty());
         Orders deleteOrder2 = entityManager.createNamedQuery("Orders.findOrdersById", Orders.class).setParameter("id", order2.getOrderId()).getSingleResult();
         entityTransaction.begin();
         entityManager.remove(deleteOrder2);
         entityTransaction.commit();
         List<Orders> deletedOrder2 = entityManager.createNamedQuery("Orders.findOrdersById", Orders.class).setParameter("id", order2.getOrderId()).getResultList();
+        //asserts orders are deleted.
         Assert.assertTrue(deletedOrder2.isEmpty());
         System.out.println("All orders of customer with customer id " + newCustomer.getCustomerId() + " are deleted successfully.");
     }
     
     /**
-     *
+     *  After each test, closes entity manager
      */
     @After
     public void afterEachTestMethod()
@@ -288,7 +275,7 @@ public class OrdersTest
     }
     
     /**
-     *
+     * after class, closes entityManagerFactory
      */
     @AfterClass
     public static void afterEachClass()
