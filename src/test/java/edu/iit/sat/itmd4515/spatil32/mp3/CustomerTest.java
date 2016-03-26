@@ -65,16 +65,14 @@ public class CustomerTest
         Wishlist wishlist2 = new Wishlist(newCustomer, product2, new Date());
         newCustomer.getWishlist().add(wishlist1);
         newCustomer.getWishlist().add(wishlist2);
-        //List<Products> newProducts = new ArrayList<>();
+
         Products product3 = new Products("Beginning J2EE", new Date(), 'B', 300, 10, 50, 20);
         Products product4 = new Products("Chicago Tourism", new Date(), 'B', 200, 10, 20, 15);
-        //newProducts.add(product1);
-        //newProducts.add(product2);
+
         Basket newBasket = new Basket(new Date(), 5, 50, newCustomer);
         newCustomer.setBasket(newBasket);
-        newCustomer.getBasket().getProducts().add(product3);
-        newCustomer.getBasket().getProducts().add(product4);
-        //newCustomer.getBasket().setProducts(newProducts);
+        //newCustomer.getBasket().getProducts().add(product3);
+        //newCustomer.getBasket().getProducts().add(product4);
         entityTransaction.begin();
         entityManager.persist(newCustomer);
         entityManager.persist(order1);
@@ -152,8 +150,8 @@ public class CustomerTest
         newCustomer.setBasket(newBasket);
         Products product3 = new Products("Beginning J2EE", new Date(), 'B', 300, 10, 50, 20);
         Products product4 = new Products("Chicago Tourism", new Date(), 'B', 200, 10, 20, 15);
-        newCustomer.getBasket().getProducts().add(product3);
-        newCustomer.getBasket().getProducts().add(product4);
+        //newCustomer.getBasket().getProducts().add(product3);
+        //newCustomer.getBasket().getProducts().add(product4);
   
         entityTransaction.begin();
         entityManager.persist(newCustomer);

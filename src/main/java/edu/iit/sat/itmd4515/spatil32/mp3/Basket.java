@@ -40,10 +40,10 @@ public class Basket
     @OneToOne
     @JoinColumn(name = "customerId_fk")
     private Customer customer;
-
+/*
     @OneToMany(mappedBy = "basket")
     private List<Products> products = new ArrayList<>();
-
+*/
     
     
     public Basket() {
@@ -110,7 +110,7 @@ public class Basket
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
-
+/*
     public List<Products> getProducts() {
         return products;
     }
@@ -118,4 +118,5 @@ public class Basket
     public void setProducts(List<Products> products) {
         this.products = products;
     }
+*/
 }
