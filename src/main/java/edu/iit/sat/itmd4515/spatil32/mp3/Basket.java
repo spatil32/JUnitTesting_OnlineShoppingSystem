@@ -16,6 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -28,6 +30,11 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "spatil32_Basket")
+@NamedQueries({
+    @NamedQuery(name = "Basket.seeAllCustomersBaskets", query = "select b from Basket b"),
+    @NamedQuery(name = "Basket.findBasketByCustomerId", query = "select b from Basket b where b.customer.customerId = :id")
+})
+
 public class Basket 
 {
     @Id
@@ -170,16 +177,6 @@ public class Basket
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
-/*
-    public List<Products> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Products> products) {
-        this.products = products;
-    }
-*/
-
     /**
      *
      * @return
@@ -194,5 +191,10 @@ public class Basket
      */
     public void setProducts(List<Products> products) {
         this.products = products;
+    }
+
+    @Override
+    public String toString() {
+        return "Basket{" + "basketId=" + basketId + ", shoppingDate=" + shoppingDate + ", numberOfItems=" + numberOfItems + ", pricePerUnit=" + pricePerUnit + ", customer=" + customer + '}';
     }
 }
