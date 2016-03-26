@@ -19,7 +19,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
- *
+ * Feedback POJO consist of all data fields to be persisted, constructors, getters, setters and toString() method.
+ * It also contains JPA mappings and persistence annotations to persist table in database.
  * @author Dell
  */
 @Entity
@@ -31,32 +32,35 @@ import javax.persistence.TemporalType;
 
 public class Feedback 
 {
+    //primary key
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int feedbackId;
-    
+
+    //mapping with customer
+    //one customer one feedback
     @OneToOne
     @JoinColumn(name = "customerId_fk")
     private Customer customer;
-    
+
     @Temporal(TemporalType.DATE)
     private Date feedbackDate;
-    
+
     private String description;
     private int rating;
 
     /**
-     *
+     * parameterless constructor
      */
     public Feedback() {
     }
 
     /**
      *
-     * @param feedbackId
-     * @param feedbackDate
-     * @param description
-     * @param rating
+     * @param feedbackId sets feedback id
+     * @param feedbackDate sets date
+     * @param description sets description
+     * @param rating sets rating
      */
     public Feedback(int feedbackId, Date feedbackDate, String description, int rating) {
         this.feedbackId = feedbackId;
@@ -67,12 +71,12 @@ public class Feedback
 
     /**
      *
-     * @param feedbackId
-     * @param customer
-     * @param feedbackDate
-     * @param description
-     * @param rating
-     */
+     * @param feedbackId sets feedback id
+     * @param customer sets customer for feedback
+     * @param feedbackDate sets date
+     * @param description sets description
+     * @param rating sets rating
+    */
     public Feedback(int feedbackId, Customer customer, Date feedbackDate, String description, int rating) {
         this.feedbackId = feedbackId;
         this.customer = customer;
@@ -83,10 +87,10 @@ public class Feedback
 
     /**
      *
-     * @param customer
-     * @param feedbackDate
-     * @param description
-     * @param rating
+     * @param customer sets customer for feedback
+     * @param feedbackDate sets date
+     * @param description sets description
+     * @param rating sets rating
      */
     public Feedback(Customer customer, Date feedbackDate, String description, int rating) {
         this.customer = customer;
@@ -94,7 +98,6 @@ public class Feedback
         this.description = description;
         this.rating = rating;
     }
-
 
     /**
      * Get the value of feedbackId
@@ -104,8 +107,6 @@ public class Feedback
     public int getFeedbackId() {
         return feedbackId;
     }
-
-
 
     /**
      * Set the value of feedbackId
@@ -118,7 +119,7 @@ public class Feedback
 
     /**
      *
-     * @return
+     * @return feedback date
      */
     public Date getFeedbackDate() {
         return feedbackDate;
@@ -126,7 +127,7 @@ public class Feedback
 
     /**
      *
-     * @param feedbackDate
+     * @param feedbackDate sets feedback date
      */
     public void setFeedbackDate(Date feedbackDate) {
         this.feedbackDate = feedbackDate;
@@ -134,7 +135,7 @@ public class Feedback
 
     /**
      *
-     * @return
+     * @return description
      */
     public String getDescription() {
         return description;
@@ -142,7 +143,7 @@ public class Feedback
 
     /**
      *
-     * @param description
+     * @param description sets description
      */
     public void setDescription(String description) {
         this.description = description;
@@ -150,7 +151,7 @@ public class Feedback
 
     /**
      *
-     * @return
+     * @return rating
      */
     public int getRating() {
         return rating;
@@ -158,7 +159,7 @@ public class Feedback
 
     /**
      *
-     * @param rating
+     * @param rating sets rating
      */
     public void setRating(int rating) {
         this.rating = rating;
@@ -166,7 +167,7 @@ public class Feedback
 
     /**
      *
-     * @return
+     * @return customer with feedback
      */
     public Customer getCustomer() {
         return customer;
@@ -174,7 +175,7 @@ public class Feedback
 
     /**
      *
-     * @param customer
+     * @param customer set customer for feedback
      */
     public void setCustomer(Customer customer) {
         this.customer = customer;

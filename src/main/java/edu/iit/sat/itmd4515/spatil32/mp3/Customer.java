@@ -21,18 +21,19 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
- *
+ * Customer POJO consist of all data fields to be persisted, constructors, getters, setters and toString() method.
+ * It also contains JPA mappings and persistence annotations to persist table in database.
  * @author Dell
  */
-
 @Entity
 @Table(name = "spatil32_Customer")
 @NamedQueries({
     @NamedQuery(name = "Customer.seeAllCustomers", query = "select c from Customer c"),
     @NamedQuery(name = "Customer.findCustomerByName", query = "select c from Customer c where c.firstName = :name")
 })
-public class Customer
+public class Customer 
 {
+    //primary key
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int customerId;
@@ -48,36 +49,46 @@ public class Customer
     private String username;
     private String password;
     private char isAdmin;
+    
+    //foreign key mapping with order
+    //One Customer with Many Orders
     @OneToMany(mappedBy = "customer")
     private List<Orders> orders = new ArrayList<>();
+    
+    //foreign key mapping with feedback
+    //one customer one feedback
     @OneToOne(mappedBy = "customer")
     private Feedback feedback;
 
+    //foreign key mapping with wishlist
+    //one customer many wishlist
     @OneToMany(mappedBy = "customer")
     private List<Wishlist> wishlist = new ArrayList<>();
 
+    //foreign key mapping with basket
+    //one customer one basket
     @OneToOne(mappedBy = "customer")
     private Basket basket;
 
     /**
-     *
+     * parameterless constructor
      */
     public Customer() {
     }
 
     /**
      *
-     * @param firstName
-     * @param lastName
-     * @param age
-     * @param gender
-     * @param address
-     * @param email
-     * @param birthDate
-     * @param phoneNo
-     * @param username
-     * @param password
-     * @param isAdmin
+     * @param firstName indicates first name
+     * @param lastName indicates last name
+     * @param age indicates age
+     * @param gender indicates gender
+     * @param address indicates address
+     * @param email indicates email
+     * @param birthDate indicates birth date
+     * @param phoneNo indicates phone number
+     * @param username indicates username
+     * @param password indicates password
+     * @param isAdmin indicates if user is admin or customer
      */
     public Customer(String firstName, String lastName, int age, char gender, String address, String email, Date birthDate, String phoneNo, String username, String password, char isAdmin) {
         this.firstName = firstName;
@@ -95,19 +106,19 @@ public class Customer
 
     /**
      *
-     * @param customerId
-     * @param firstName
-     * @param lastName
-     * @param age
-     * @param gender
-     * @param address
-     * @param email
-     * @param birthDate
-     * @param phoneNo
-     * @param username
-     * @param password
-     * @param isAdmin
-     * @param feedback
+     * @param customerId indicates customer id
+     * @param firstName indicates first name
+     * @param lastName indicates last name
+     * @param age indicates age
+     * @param gender indicates gender
+     * @param address indicates address
+     * @param email indicates email
+     * @param birthDate indicates birth date
+     * @param phoneNo indicates phone 
+     * @param username indicates username
+     * @param password indicates password
+     * @param isAdmin indicates isadmin or customer
+     * @param feedback indicates feedback
      */
     public Customer(int customerId, String firstName, String lastName, int age, char gender, String address, String email, Date birthDate, String phoneNo, String username, String password, char isAdmin, Feedback feedback) {
         this.customerId = customerId;
@@ -126,19 +137,19 @@ public class Customer
     }
 
     /**
-     *
-     * @param firstName
-     * @param lastName
-     * @param age
-     * @param gender
-     * @param address
-     * @param email
-     * @param birthDate
-     * @param phoneNo
-     * @param username
-     * @param password
-     * @param isAdmin
-     * @param basket
+     * @param customerId indicates customer id
+     * @param firstName indicates first name
+     * @param lastName indicates last name
+     * @param age indicates age
+     * @param gender indicates gender
+     * @param address indicates address
+     * @param email indicates email
+     * @param birthDate indicates birth date
+     * @param phoneNo indicates phone 
+     * @param username indicates username
+     * @param password indicates password
+     * @param isAdmin indicates isadmin or customer
+     * @param basket indu=icates basket
      */
     public Customer(String firstName, String lastName, int age, char gender, String address, String email, Date birthDate, String phoneNo, String username, String password, char isAdmin, Basket basket) {
         this.firstName = firstName;
@@ -155,14 +166,11 @@ public class Customer
         this.basket = basket;
     }
 
-
-    
     /**
      * Get the value of customerId
      *
      * @return the value of customerId
      */
-
     public int getCustomerId() {
         return customerId;
     }
@@ -178,7 +186,7 @@ public class Customer
 
     /**
      *
-     * @return
+     * @return first name
      */
     public String getFirstName() {
         return firstName;
@@ -186,7 +194,7 @@ public class Customer
 
     /**
      *
-     * @param firstName
+     * @param firstName sets firstname
      */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
@@ -194,7 +202,7 @@ public class Customer
 
     /**
      *
-     * @return
+     * @return lastname
      */
     public String getLastName() {
         return lastName;
@@ -202,7 +210,7 @@ public class Customer
 
     /**
      *
-     * @param lastName
+     * @param lastName sets lastname
      */
     public void setLastName(String lastName) {
         this.lastName = lastName;
@@ -210,7 +218,7 @@ public class Customer
 
     /**
      *
-     * @return
+     * @return age
      */
     public int getAge() {
         return age;
@@ -218,7 +226,7 @@ public class Customer
 
     /**
      *
-     * @param age
+     * @param age sets age
      */
     public void setAge(int age) {
         this.age = age;
@@ -226,7 +234,7 @@ public class Customer
 
     /**
      *
-     * @return
+     * @return gender
      */
     public char getGender() {
         return gender;
@@ -234,7 +242,7 @@ public class Customer
 
     /**
      *
-     * @param gender
+     * @param gender sets gender
      */
     public void setGender(char gender) {
         this.gender = gender;
@@ -242,7 +250,7 @@ public class Customer
 
     /**
      *
-     * @return
+     * @return address
      */
     public String getAddress() {
         return address;
@@ -250,7 +258,7 @@ public class Customer
 
     /**
      *
-     * @param address
+     * @param address sets address
      */
     public void setAddress(String address) {
         this.address = address;
@@ -258,7 +266,7 @@ public class Customer
 
     /**
      *
-     * @return
+     * @return email
      */
     public String getEmail() {
         return email;
@@ -266,7 +274,7 @@ public class Customer
 
     /**
      *
-     * @param email
+     * @param email sets email
      */
     public void setEmail(String email) {
         this.email = email;
@@ -274,7 +282,7 @@ public class Customer
 
     /**
      *
-     * @return
+     * @return birth date
      */
     public Date getBirthDate() {
         return birthDate;
@@ -282,7 +290,7 @@ public class Customer
 
     /**
      *
-     * @return
+     * @return phone number
      */
     public String getPhoneNo() {
         return phoneNo;
@@ -290,7 +298,7 @@ public class Customer
 
     /**
      *
-     * @param phoneNo
+     * @param phoneNo  sets phone
      */
     public void setPhoneNo(String phoneNo) {
         this.phoneNo = phoneNo;
@@ -298,7 +306,7 @@ public class Customer
 
     /**
      *
-     * @return
+     * @return username
      */
     public String getUsername() {
         return username;
@@ -306,7 +314,7 @@ public class Customer
 
     /**
      *
-     * @param username
+     * @param username return username
      */
     public void setUsername(String username) {
         this.username = username;
@@ -314,7 +322,7 @@ public class Customer
 
     /**
      *
-     * @return
+     * @return password
      */
     public String getPassword() {
         return password;
@@ -322,7 +330,7 @@ public class Customer
 
     /**
      *
-     * @param password
+     * @param password set password
      */
     public void setPassword(String password) {
         this.password = password;
@@ -330,7 +338,7 @@ public class Customer
 
     /**
      *
-     * @return
+     * @return isadmin or customer
      */
     public char getIsAdmin() {
         return isAdmin;
@@ -338,7 +346,7 @@ public class Customer
 
     /**
      *
-     * @param birthDate
+     * @param birthDate set birth date
      */
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
@@ -346,15 +354,15 @@ public class Customer
 
     /**
      *
-     * @param isAdmin
+     * @param isAdmin set isadmin or customer
      */
     public void setIsAdmin(char isAdmin) {
         this.isAdmin = isAdmin;
-    }    
+    }
 
     /**
      *
-     * @return
+     * @return list of orders
      */
     public List<Orders> getOrders() {
         return orders;
@@ -362,7 +370,7 @@ public class Customer
 
     /**
      *
-     * @param orders
+     * @param orders sets new orders
      */
     public void setOrders(List<Orders> orders) {
         this.orders = orders;
@@ -370,7 +378,7 @@ public class Customer
 
     /**
      *
-     * @return
+     * @return feedback
      */
     public Feedback getFeedback() {
         return feedback;
@@ -378,20 +386,15 @@ public class Customer
 
     /**
      *
-     * @param feedback
+     * @param feedback sets new feedback
      */
     public void setFeedback(Feedback feedback) {
         this.feedback = feedback;
     }
 
-    @Override
-    public String toString() {
-        return "Customer Id = " + customerId + ", First Name = " + firstName + ", Last Name = " + lastName + ", Age = " + age + ", Gender = " + gender + ", Address = " + address + ", Email = " + email + ", Birth Date = " + birthDate + ", Phone No = " + phoneNo + ", username = " + username + ", password = " + password + ", isAdmin = " + isAdmin + '}';
-    }
-
     /**
      *
-     * @return
+     * @return wishlists
      */
     public List<Wishlist> getWishlist() {
         return wishlist;
@@ -399,7 +402,7 @@ public class Customer
 
     /**
      *
-     * @param wishlist
+     * @param wishlist adds new wishlist
      */
     public void setWishlist(List<Wishlist> wishlist) {
         this.wishlist = wishlist;
@@ -407,7 +410,7 @@ public class Customer
 
     /**
      *
-     * @return
+     * @return basket
      */
     public Basket getBasket() {
         return basket;
@@ -415,9 +418,14 @@ public class Customer
 
     /**
      *
-     * @param basket
+     * @param basket sets new basket with products
      */
     public void setBasket(Basket basket) {
         this.basket = basket;
+    }
+
+    @Override
+    public String toString() {
+        return "Customer Id = " + customerId + ", First Name = " + firstName + ", Last Name = " + lastName + ", Age = " + age + ", Gender = " + gender + ", Address = " + address + ", Email = " + email + ", Birth Date = " + birthDate + ", Phone No = " + phoneNo + ", username = " + username + ", password = " + password + ", isAdmin = " + isAdmin + '}';
     }
 }

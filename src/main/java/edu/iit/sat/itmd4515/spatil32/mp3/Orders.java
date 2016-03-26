@@ -19,9 +19,10 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
- *
+ * Orders POJO consist of all data fields to be persisted, constructors, getters, setters and toString() method.
+ * It also contains JPA mappings and persistence annotations to persist table in database.
  * @author Dell
-*/
+ */
 @Entity
 @Table(name = "spatil32_Orders")
 @NamedQueries({
@@ -31,9 +32,13 @@ import javax.persistence.TemporalType;
 
 public class Orders 
 {
+    //primary key
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int orderId;
+    
+    //mapping with customer
+    //one customer many orders
     @ManyToOne
     @JoinColumn(name = "customerId_fk")
     private Customer customer;
@@ -42,15 +47,15 @@ public class Orders
     private Date deliveryDate;
 
     /**
-     *
+     * parameterless constructor
      */
     public Orders() {
     }
-    
+
     /**
      *
-     * @param totalBillAmount
-     * @param deliveryDate
+     * @param totalBillAmount sets total bill
+     * @param deliveryDate sets delivery date
      */
     public Orders(int totalBillAmount, Date deliveryDate) {
         this.totalBillAmount = totalBillAmount;
@@ -59,9 +64,9 @@ public class Orders
 
     /**
      *
-     * @param customer
-     * @param totalBillAmount
-     * @param deliveryDate
+     * @param customer sets customer for orders
+     * @param totalBillAmount sets total bill
+     * @param deliveryDate sets delivery date
      */
     public Orders(Customer customer, int totalBillAmount, Date deliveryDate) {
         this.customer = customer;
@@ -71,10 +76,10 @@ public class Orders
 
     /**
      *
-     * @param orderId
-     * @param customer
-     * @param totalBillAmount
-     * @param deliveryDate
+     * @param orderId sets order id
+     * @param customer sets customer for orders
+     * @param totalBillAmount sets total bill
+     * @param deliveryDate sets delivery date
      */
     public Orders(int orderId, Customer customer, int totalBillAmount, Date deliveryDate) {
         this.orderId = orderId;
@@ -82,7 +87,6 @@ public class Orders
         this.totalBillAmount = totalBillAmount;
         this.deliveryDate = deliveryDate;
     }
-
 
     /**
      * Get the value of orderId
@@ -95,7 +99,7 @@ public class Orders
 
     /**
      *
-     * @param orderId
+     * @param orderId sets order id
      */
     public void setOrderId(int orderId) {
         this.orderId = orderId;
@@ -103,7 +107,7 @@ public class Orders
 
     /**
      *
-     * @return
+     * @return total bill amount
      */
     public int getTotalBillAmount() {
         return totalBillAmount;
@@ -111,7 +115,7 @@ public class Orders
 
     /**
      *
-     * @param totalBillAmount
+     * @param totalBillAmount sets new bill
      */
     public void setTotalBillAmount(int totalBillAmount) {
         this.totalBillAmount = totalBillAmount;
@@ -119,7 +123,7 @@ public class Orders
 
     /**
      *
-     * @return
+     * @return delivery date
      */
     public Date getDeliveryDate() {
         return deliveryDate;
@@ -127,7 +131,7 @@ public class Orders
 
     /**
      *
-     * @param deliveryDate
+     * @param deliveryDate sets delivery date
      */
     public void setDeliveryDate(Date deliveryDate) {
         this.deliveryDate = deliveryDate;
@@ -135,7 +139,7 @@ public class Orders
 
     /**
      *
-     * @return
+     * @return customer for order
      */
     public Customer getCustomer() {
         return customer;
@@ -143,7 +147,7 @@ public class Orders
 
     /**
      *
-     * @param customer
+     * @param customer sets customer to order
      */
     public void setCustomer(Customer customer) {
         this.customer = customer;

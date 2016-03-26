@@ -12,9 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -23,7 +21,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
- *
+ * Products POJO consist of all data fields to be persisted, constructors, getters, setters and toString() method.
+ * It also contains JPA mappings and persistence annotations to persist table in database.
  * @author Dell
  */
 @Entity
@@ -35,6 +34,7 @@ import javax.persistence.TemporalType;
 
 public class Products 
 {
+    //primary key
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int productId;
@@ -47,28 +47,32 @@ public class Products
     private int totalQty;
     private int availableQty;
 
+    //foreign key mapping
+    //one product many wishlists
     @OneToMany(mappedBy = "product")
     private List<Wishlist> wishlist = new ArrayList<>();
 
+    //foreign key mapping
+    //many products many baskets
     @ManyToMany(mappedBy = "products")
     private List<Basket> basket;
 
     /**
-     *
+     * parameterless constructor
      */
     public Products() {
     }
 
     /**
      *
-     * @param productId
-     * @param productName
-     * @param mfgDate
-     * @param category
-     * @param price
-     * @param discount
-     * @param totalQty
-     * @param availableQty
+     * @param productId sets product id
+     * @param productName sets product name
+     * @param mfgDate sets manufacturing date
+     * @param category sets category of product
+     * @param price sets price
+     * @param discount sets discount
+     * @param totalQty sets total quantity
+     * @param availableQty sets available quantity
      */
     public Products(int productId, String productName, Date mfgDate, char category, int price, int discount, int totalQty, int availableQty) {
         this.productId = productId;
@@ -83,13 +87,13 @@ public class Products
 
     /**
      *
-     * @param productName
-     * @param mfgDate
-     * @param category
-     * @param price
-     * @param discount
-     * @param totalQty
-     * @param availableQty
+     * @param productName sets product name
+     * @param mfgDate sets manufacturing date
+     * @param category sets category of product
+     * @param price sets price
+     * @param discount sets discount
+     * @param totalQty sets total quantity
+     * @param availableQty sets available quantity
      */
     public Products(String productName, Date mfgDate, char category, int price, int discount, int totalQty, int availableQty) {
         this.productName = productName;
@@ -100,9 +104,6 @@ public class Products
         this.totalQty = totalQty;
         this.availableQty = availableQty;
     }
-
-
-
 
     /**
      * Get the value of productId
@@ -124,7 +125,7 @@ public class Products
 
     /**
      *
-     * @return
+     * @return product name
      */
     public String getProductName() {
         return productName;
@@ -132,7 +133,7 @@ public class Products
 
     /**
      *
-     * @param productName
+     * @param productName sets product name
      */
     public void setProductName(String productName) {
         this.productName = productName;
@@ -140,7 +141,7 @@ public class Products
 
     /**
      *
-     * @return
+     * @return manufactring date
      */
     public Date getMfgDate() {
         return mfgDate;
@@ -148,7 +149,7 @@ public class Products
 
     /**
      *
-     * @param mfgDate
+     * @param mfgDate sets manufacturing date
      */
     public void setMfgDate(Date mfgDate) {
         this.mfgDate = mfgDate;
@@ -156,7 +157,7 @@ public class Products
 
     /**
      *
-     * @return
+     * @return category
      */
     public char getCategory() {
         return category;
@@ -164,7 +165,7 @@ public class Products
 
     /**
      *
-     * @param category
+     * @param category sets category
      */
     public void setCategory(char category) {
         this.category = category;
@@ -172,7 +173,7 @@ public class Products
 
     /**
      *
-     * @return
+     * @return price
      */
     public int getPrice() {
         return price;
@@ -180,7 +181,7 @@ public class Products
 
     /**
      *
-     * @param price
+     * @param price sets new price
      */
     public void setPrice(int price) {
         this.price = price;
@@ -188,7 +189,7 @@ public class Products
 
     /**
      *
-     * @return
+     * @return discount
      */
     public int getDiscount() {
         return discount;
@@ -196,7 +197,7 @@ public class Products
 
     /**
      *
-     * @param discount
+     * @param discount sets discount
      */
     public void setDiscount(int discount) {
         this.discount = discount;
@@ -204,7 +205,7 @@ public class Products
 
     /**
      *
-     * @return
+     * @return total quantity
      */
     public int getTotalQty() {
         return totalQty;
@@ -212,7 +213,7 @@ public class Products
 
     /**
      *
-     * @param totalQty
+     * @param totalQty sets total quantity
      */
     public void setTotalQty(int totalQty) {
         this.totalQty = totalQty;
@@ -220,7 +221,7 @@ public class Products
 
     /**
      *
-     * @return
+     * @return available number of products
      */
     public int getAvailableQty() {
         return availableQty;
@@ -228,20 +229,15 @@ public class Products
 
     /**
      *
-     * @param availableQty
-     */
+     * @param availableQty sets new count of available products
+     */ 
     public void setAvailableQty(int availableQty) {
         this.availableQty = availableQty;
     }
 
-    @Override
-    public String toString() {
-        return "Products{" + "productId=" + productId + ", productName=" + productName + ", mfgDate=" + mfgDate + ", category=" + category + ", price=" + price + ", discount=" + discount + ", totalQty=" + totalQty + ", availableQty=" + availableQty + '}';
-    }
-
     /**
      *
-     * @return
+     * @return wishlists
      */
     public List<Wishlist> getWishlist() {
         return wishlist;
@@ -249,7 +245,7 @@ public class Products
 
     /**
      *
-     * @param wishlist
+     * @param wishlist set new wishlist
      */
     public void setWishlist(List<Wishlist> wishlist) {
         this.wishlist = wishlist;
@@ -257,7 +253,7 @@ public class Products
 
     /**
      *
-     * @return
+     * @return get list of baskets
      */
     public List<Basket> getBasket() {
         return basket;
@@ -265,9 +261,14 @@ public class Products
 
     /**
      *
-     * @param basket
+     * @param basket sets new basket
      */
     public void setBasket(List<Basket> basket) {
         this.basket = basket;
     }
+    
+    @Override
+    public String toString() {
+        return "Products{" + "productId=" + productId + ", productName=" + productName + ", mfgDate=" + mfgDate + ", category=" + category + ", price=" + price + ", discount=" + discount + ", totalQty=" + totalQty + ", availableQty=" + availableQty + '}';
+    }    
 }

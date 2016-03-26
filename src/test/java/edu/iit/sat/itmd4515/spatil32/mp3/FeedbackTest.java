@@ -20,7 +20,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
- *
+ * FeedbackTest class contains functionality to persist Feedback entity in database table with help of javax.persistence API's.
  * @author Dell
  */
 public class FeedbackTest 
@@ -30,13 +30,13 @@ public class FeedbackTest
     private EntityTransaction entityTransaction;
 
     /**
-     *
+     * parameterless constructor
      */
     public FeedbackTest() {
     }
 
     /**
-     *
+     * before class, a new persistence unit with name spatil32PU will be created.
      */
     @BeforeClass
     public static void beforeEachClass()
@@ -47,29 +47,17 @@ public class FeedbackTest
     }
     
     /**
-     *
+     * before starting test, entityManager and entityTransaction are instantiated.
      */
     @Before
     public void beforeEachTestMethod()
     {
         entityManager = entityManagerFactory.createEntityManager();
         entityTransaction = entityManager.getTransaction();                
-/*        
-        Customer newCustomer = new Customer("Paul", "Jacob", 20, 'M', "Oregaon", "Paul.Jacob@gmail.com", new GregorianCalendar(1996, 3, 3).getTime(), "84529", "paul", "jacob", 'N');
-        Feedback newFeedback = new Feedback(newCustomer, new Date(), "Nice discounts", 9);
-        newCustomer.setFeedback(newFeedback);
-        entityTransaction.begin();
-        entityManager.persist(newCustomer);
-        entityManager.persist(newFeedback);
-        entityTransaction.commit();
-
-        Assert.assertNotNull(newFeedback.getFeedbackId());
-       System.out.println("New feedback is persisted to Feedback table with customer Id " + newCustomer.getCustomerId() + " as foreign key constraint.");
-*/
     }
     
     /**
-     *
+     * Inserts new feedback by persisting new customer.
      */
     @Test
     public void testInsertFeedback()
@@ -97,7 +85,7 @@ public class FeedbackTest
     }
 
     /**
-     *
+     * Reads all feedbacks.
      */
     @Test
     public void testReadAllFeedbacks()
@@ -107,6 +95,7 @@ public class FeedbackTest
         System.out.println(" LIST OF ALL THE FEEDBACKS PERSISTED ");
         System.out.println("***************************************************************");
         List<Feedback> allFeedbacks = entityManager.createNamedQuery("Feedback.seeAllFeedbacks", Feedback.class).getResultList();
+        //asserts feedbacks exists by comparing list size greater than zero
         Assert.assertTrue(allFeedbacks.size() > 0);
         System.out.println("*** List of all feedbacks persisted ***");
         for (Feedback allFeedback : allFeedbacks) 
@@ -116,7 +105,7 @@ public class FeedbackTest
     }
     
     /**
-     *
+     * updates the feedback of newly persisted customer and his feedback.
      */
     @Test
     public void testUpdateExistingFeedback()
@@ -129,7 +118,7 @@ public class FeedbackTest
         entityManager.persist(newCustomer);
         entityManager.persist(newFeedback);
         entityTransaction.commit();
-
+        //asserts new feedback persisted.
         Assert.assertNotNull(newFeedback.getFeedbackId());
         System.out.println("New feedback is persisted to Feedback table with customer Id " + newCustomer.getCustomerId() + " as foreign key constraint.");
         
@@ -154,6 +143,7 @@ public class FeedbackTest
         System.out.println("__________________________________________________________________");
         
         Feedback updatedFeedback = entityManager.createNamedQuery("Feedback.findFeedbackById", Feedback.class).setParameter("id", newFeedback.getFeedbackId()).getSingleResult();
+        //asserts the updated values are equal to newly set values.
         Assert.assertEquals("Good sports section", updatedFeedback.getDescription());
         Assert.assertEquals(6, updatedFeedback.getRating());
         Assert.assertEquals(updatedFeedback.getFeedbackDate(), new GregorianCalendar(2016, 31, 3).getTime());
@@ -161,7 +151,7 @@ public class FeedbackTest
     }
 
     /**
-     *
+     * Delete feedback of newly persisted customer.
      */
     @Test
     public void testDeleteFeedbackById()
@@ -186,11 +176,12 @@ public class FeedbackTest
         entityManager.remove(deleteFeedback);
         entityTransaction.commit();
         List<Feedback> deletedFeedback = entityManager.createNamedQuery("Feedback.findFeedbackById", Feedback.class).setParameter("id", newFeedback.getFeedbackId()).getResultList();
+        //asserts feedback is deleted.
         Assert.assertTrue(deletedFeedback.isEmpty());
     }
     
     /**
-     *
+     *  After each test, closes entity manager
      */
     @After
     public void afterEachTestMethod()
@@ -199,7 +190,7 @@ public class FeedbackTest
     }
     
     /**
-     *
+     * after class, closes entityManagerFactory
      */
     @AfterClass
     public static void afterEachClass()
