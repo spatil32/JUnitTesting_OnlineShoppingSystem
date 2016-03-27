@@ -6,9 +6,7 @@
 package edu.iit.sat.itmd4515.spatil32.mp3;
 
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Scanner;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;

@@ -65,11 +65,11 @@ public class FeedbackTest
         System.out.println("In test insert feedback.");
         Customer newCustomer1 = new Customer("Irwin", "Selvam", 22, 'M', "Mumbai", "Irwin.Selvam@gmail.com", new GregorianCalendar(1994, 7, 6).getTime(), "84256", "irwin", "selvam", 'N');
         Feedback newFeedback1 = new Feedback(newCustomer1, new Date(), "Good brands", 6);
-        newCustomer1.setFeedback(newFeedback1);
+        newCustomer1.addFeeback(newFeedback1);
 
         Customer newCustomer2 = new Customer("Jennifer", "Yale", 26, 'F', "Illinois", "Jennifer.Yale@gmail.com", new GregorianCalendar(1990, 12, 12).getTime(), "36243", "jennifer", "yale", 'N');
         Feedback newFeedback2 = new Feedback(newCustomer2, new Date(), "Nice discounts", 9);
-        newCustomer2.setFeedback(newFeedback2);
+        newCustomer2.addFeeback(newFeedback2);
         
         entityTransaction.begin();
         entityManager.persist(newCustomer1);
@@ -113,7 +113,7 @@ public class FeedbackTest
         System.out.println("PERSISTING A CUSTOMER AND FEEDBACK BEFORE TO UPDATE IN FURTHER STEPS.");
         Customer newCustomer = new Customer("Joy", "Dsouza", 23, 'M', "Delhi", "Joy.Dsouza@gmail.com", new GregorianCalendar(1993, 2, 2).getTime(), "11489", "joy", "dsouza", 'N');
         Feedback newFeedback = new Feedback(newCustomer, new Date(), "Include sport section", 5);
-        newCustomer.setFeedback(newFeedback);
+        newCustomer.addFeeback(newFeedback);
         entityTransaction.begin();
         entityManager.persist(newCustomer);
         entityManager.persist(newFeedback);
@@ -159,7 +159,7 @@ public class FeedbackTest
         System.out.println("PERSISTING A CUSTOMER AND FEEDBACK BEFORE TO DELETE IN FURTHER STEPS.");
         Customer newCustomer = new Customer("Paul", "Jacob", 20, 'M', "Oregaon", "Paul.Jacob@gmail.com", new GregorianCalendar(1996, 3, 3).getTime(), "84529", "paul", "jacob", 'N');
         Feedback newFeedback = new Feedback(newCustomer, new Date(), "Nice discounts", 9);
-        newCustomer.setFeedback(newFeedback);
+        newCustomer.addFeeback(newFeedback);
         entityTransaction.begin();
         entityManager.persist(newCustomer);
         entityManager.persist(newFeedback);

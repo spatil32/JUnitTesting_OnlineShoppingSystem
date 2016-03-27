@@ -70,7 +70,9 @@ public class BasketTest
         products.add(product1);
         products.add(product2);
         Basket newBasket = new Basket(new Date(), 2, 30, newCustomer);
-        newBasket.setProducts(products);
+        for (Products product : products) {
+            newBasket.addProducts(product);
+        }
     
         entityTransaction.begin();
         entityManager.persist(newCustomer);
@@ -100,7 +102,9 @@ public class BasketTest
         products.add(product1);
         products.add(product2);
         Basket newBasket = new Basket(new Date(), 2, 2, newCustomer);
-        newBasket.setProducts(products);
+        for (Products product : products) {
+            newBasket.addProducts(product);
+        }
 
         Customer newCustomer1 = new Customer("Immanuel", "Stephen", 30, 'M', "Chennai", "Immanuel.S@gmail.com", new GregorianCalendar(1986, 8, 13).getTime(), "12546", "immanuel", "stephen", 'N');
         Products product3 = new Products("Beginning J2EE", new Date(), 'B', 300, 10, 50, 20);
@@ -109,7 +113,9 @@ public class BasketTest
         products1.add(product3);
         products1.add(product4);
         Basket newBasket1 = new Basket(new Date(), 2, 2, newCustomer1);
-        newBasket1.setProducts(products1);
+        for (Products product : products1) {
+            newBasket.addProducts(product);
+        }
 
         entityTransaction.begin();
         entityManager.persist(newCustomer);
@@ -161,7 +167,9 @@ public class BasketTest
         products.add(product1);
         products.add(product2);
         Basket newBasket = new Basket(new Date(), 2, 2, newCustomer);
-        newBasket.setProducts(products);
+        for (Products product : products) {
+            newBasket.addProducts(product);
+        }
 
         entityTransaction.begin();
         entityManager.persist(newCustomer);
@@ -215,7 +223,9 @@ public class BasketTest
         products.add(product1);
         products.add(product2);
         Basket newBasket = new Basket(new Date(), 2, 2, newCustomer);
-        newBasket.setProducts(products);
+        for (Products product : products) {
+            newBasket.addProducts(product);
+        }
 
         entityTransaction.begin();
         entityManager.persist(newCustomer);

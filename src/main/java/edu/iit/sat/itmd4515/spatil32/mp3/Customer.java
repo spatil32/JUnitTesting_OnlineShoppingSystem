@@ -423,6 +423,37 @@ public class Customer
         this.basket = basket;
     }
 
+    /**
+     * helper method to add new orders.
+     * @param order is new order
+     */
+    public void addOrders(Orders order)
+    {
+        if(!this.orders.contains(order))
+            this.orders.add(order);
+        order.setCustomer(this);
+    }
+    
+    /**
+     * helper method to add new feedback by the customer.
+     * @param feedback is new feedback
+     */
+    public void addFeeback(Feedback feedback)
+    {
+        this.setFeedback(feedback);
+        feedback.setCustomer(this);
+    }
+    /**
+     * helper method to add new wishlist for the customer.
+     * @param wishlist is new wishlist.
+     */
+    public void addWishlists(Wishlist wishlist)
+    {
+        if(!this.wishlist.contains(wishlist))
+            this.wishlist.add(wishlist);
+        wishlist.setCustomer(this);
+    }
+    
     @Override
     public String toString() {
         return "Customer Id = " + customerId + ", First Name = " + firstName + ", Last Name = " + lastName + ", Age = " + age + ", Gender = " + gender + ", Address = " + address + ", Email = " + email + ", Birth Date = " + birthDate + ", Phone No = " + phoneNo + ", username = " + username + ", password = " + password + ", isAdmin = " + isAdmin + '}';

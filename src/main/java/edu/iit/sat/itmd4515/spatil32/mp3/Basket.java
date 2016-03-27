@@ -192,6 +192,16 @@ public class Basket
         this.products = products;
     }
 
+    /**
+     * helper method to add new product
+     * @param product is new product.
+     */
+    public void addProducts(Products product)
+    {
+        if(!this.products.contains(product))
+            this.products.add(product);
+    }
+    
     @Override
     public String toString() {
         return "Basket{" + "basketId=" + basketId + ", shoppingDate=" + shoppingDate + ", numberOfItems=" + numberOfItems + ", pricePerUnit=" + pricePerUnit + ", customer=" + customer + '}';

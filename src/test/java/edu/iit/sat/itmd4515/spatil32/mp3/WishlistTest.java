@@ -75,10 +75,10 @@ public class WishlistTest
         Wishlist wishlist3 = new Wishlist(newCustomer2, product3, new Date());
         Wishlist wishlist4 = new Wishlist(newCustomer2, product4, new Date());
 
-        newCustomer1.getWishlist().add(wishlist1);
-        newCustomer1.getWishlist().add(wishlist2);
-        newCustomer2.getWishlist().add(wishlist3);
-        newCustomer2.getWishlist().add(wishlist4);
+        newCustomer1.addWishlists(wishlist1);
+        newCustomer1.addWishlists(wishlist2);
+        newCustomer2.addWishlists(wishlist3);
+        newCustomer2.addWishlists(wishlist4);
 
         entityTransaction.begin();
         entityManager.persist(newCustomer1);
@@ -122,10 +122,10 @@ public class WishlistTest
         Wishlist wishlist3 = new Wishlist(newCustomer2, product3, new Date());
         Wishlist wishlist4 = new Wishlist(newCustomer2, product4, new Date());
 
-        newCustomer1.getWishlist().add(wishlist1);
-        newCustomer1.getWishlist().add(wishlist2);
-        newCustomer2.getWishlist().add(wishlist3);
-        newCustomer2.getWishlist().add(wishlist4);
+        newCustomer1.addWishlists(wishlist1);
+        newCustomer1.addWishlists(wishlist2);
+        newCustomer2.addWishlists(wishlist3);
+        newCustomer2.addWishlists(wishlist4);
 
         entityTransaction.begin();
         entityManager.persist(newCustomer1);

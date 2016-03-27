@@ -65,23 +65,22 @@ public class CustomerTest
         Customer newCustomer = new Customer("Shreyas", "Patil", 25, 'M', "Pune", "Shreyas.Patil@gmail.com", new GregorianCalendar(1991, 5, 16).getTime(), "12546", "shreyas", "patil", 'N');
         Orders order1 = new Orders(newCustomer, 5000, new Date());
         Orders order2 = new Orders(newCustomer, 6000, new Date());
-        newCustomer.getOrders().add(order1);
-        newCustomer.getOrders().add(order2);
+        newCustomer.addOrders(order1);
+        newCustomer.addOrders(order2);
         Feedback feedback = new Feedback(newCustomer, new Date(), "Good Clothes", 7);
-        newCustomer.setFeedback(feedback);
+        newCustomer.addFeeback(feedback);
         Products product1 = new Products("Britannia", new Date(), 'K', 20, 5, 5, 2);
         Products product2 = new Products("Nestle", new Date(), 'K', 30, 10, 7, 5);
         Wishlist wishlist1 = new Wishlist(newCustomer, product1, new Date());
         Wishlist wishlist2 = new Wishlist(newCustomer, product2, new Date());
-        newCustomer.getWishlist().add(wishlist1);
-        newCustomer.getWishlist().add(wishlist2);
-
+        newCustomer.addWishlists(wishlist1);
+        newCustomer.addWishlists(wishlist2);
         Products product3 = new Products("Beginning J2EE", new Date(), 'B', 300, 10, 50, 20);
         Products product4 = new Products("Chicago Tourism", new Date(), 'B', 200, 10, 20, 15);
 
         Basket newBasket = new Basket(new Date(), 5, 50, newCustomer);
-        newBasket.getProducts().add(product3);
-        newBasket.getProducts().add(product4);
+        newBasket.addProducts(product3);
+        newBasket.addProducts(product4);
         newCustomer.setBasket(newBasket);
 
         entityTransaction.begin();
@@ -158,22 +157,22 @@ public class CustomerTest
         Customer newCustomer = new Customer("Immanuel", "Stephen", 30, 'M', "Chennai", "Immanuel.S@gmail.com", new GregorianCalendar(1986, 8, 13).getTime(), "12546", "immanuel", "stephen", 'N');
         Orders order1 = new Orders(newCustomer, 2000, new Date());
         Orders order2 = new Orders(newCustomer, 1000, new Date());
-        newCustomer.getOrders().add(order1);
-        newCustomer.getOrders().add(order2);
+        newCustomer.addOrders(order1);
+        newCustomer.addOrders(order2);
         Feedback feedback = new Feedback(newCustomer, new Date(), "Good Products", 8);
-        newCustomer.setFeedback(feedback);
+        newCustomer.addFeeback(feedback);
         Products product1 = new Products("Hair Dryer", new Date(), 'E', 1200, 10, 50, 35);
         Products product2 = new Products("Juicer", new Date(), 'E', 800, 10, 10, 5);
         Wishlist wishlist1 = new Wishlist(newCustomer, product1, new Date());
         Wishlist wishlist2 = new Wishlist(newCustomer, product1, new Date());
-        newCustomer.getWishlist().add(wishlist1);
-        newCustomer.getWishlist().add(wishlist2);
+        newCustomer.addWishlists(wishlist1);
+        newCustomer.addWishlists(wishlist2);
         Products product3 = new Products("Beginning J2EE", new Date(), 'B', 300, 10, 50, 20);
         Products product4 = new Products("Chicago Tourism", new Date(), 'B', 200, 10, 20, 15);
 
         Basket newBasket = new Basket(new Date(), 5, 50, newCustomer);
-        newBasket.getProducts().add(product3);
-        newBasket.getProducts().add(product4);
+        newBasket.addProducts(product3);
+        newBasket.addProducts(product4);
         newCustomer.setBasket(newBasket);
 
         entityTransaction.begin();

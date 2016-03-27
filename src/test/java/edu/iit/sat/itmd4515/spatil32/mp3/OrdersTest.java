@@ -67,8 +67,8 @@ public class OrdersTest
         Customer newCustomer = new Customer("Irwin", "Selvam", 22, 'M', "Mumbai", "Irwin.Selvam@gmail.com", new GregorianCalendar(1994, 7, 6).getTime(), "84256", "irwin", "selvam", 'N');
         Orders order1 = new Orders(newCustomer, 10000, new Date());
         Orders order2 = new Orders(newCustomer, 1500, new Date());
-        newCustomer.getOrders().add(order1);
-        newCustomer.getOrders().add(order2);
+        newCustomer.addOrders(order1);
+        newCustomer.addOrders(order2);
         
         entityTransaction.begin();
         entityManager.persist(newCustomer);
@@ -99,10 +99,10 @@ public class OrdersTest
         Orders order3 = new Orders(newCustomer, 4000, new Date());
         Orders order4 = new Orders(newCustomer, 8000, new Date());
         
-        newCustomer.getOrders().add(order1);
-        newCustomer.getOrders().add(order2);
-        newCustomer.getOrders().add(order3);
-        newCustomer.getOrders().add(order4);
+        newCustomer.addOrders(order1);
+        newCustomer.addOrders(order2);
+        newCustomer.addOrders(order3);
+        newCustomer.addOrders(order4);
         
         entityTransaction.begin();
         entityManager.persist(newCustomer);
@@ -149,9 +149,9 @@ public class OrdersTest
         Orders order2 = new Orders(newCustomer, 1500, new Date());
         Orders order3 = new Orders(newCustomer, 4000, new Date());
         
-        newCustomer.getOrders().add(order1);
-        newCustomer.getOrders().add(order2);
-        newCustomer.getOrders().add(order3);
+        newCustomer.addOrders(order1);
+        newCustomer.addOrders(order2);
+        newCustomer.addOrders(order3);
         
         entityTransaction.begin();
         entityManager.persist(newCustomer);
@@ -230,8 +230,8 @@ public class OrdersTest
         Customer newCustomer = new Customer("Uma", "Selvam", 30, 'F', "Chennai", "Uma.Selvam@gmail.com", new GregorianCalendar(1987, 1, 1).getTime(), "14967", "uma", "selvam", 'N');
         Orders order1 = new Orders(newCustomer, 3000, new Date());
         Orders order2 = new Orders(newCustomer, 7000, new Date());
-        newCustomer.getOrders().add(order1);
-        newCustomer.getOrders().add(order2);        
+        newCustomer.addOrders(order1);
+        newCustomer.addOrders(order2);        
         entityTransaction.begin();
         entityManager.persist(newCustomer);
         entityManager.persist(order1);
