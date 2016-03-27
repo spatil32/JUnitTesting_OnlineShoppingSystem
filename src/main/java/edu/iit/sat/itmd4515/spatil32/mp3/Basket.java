@@ -23,8 +23,10 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
- * Basket POJO consist of all data fields to be persisted, constructors, getters, setters and toString() method.
- * It also contains JPA mappings and persistence annotations to persist table in database.
+ * Basket POJO consist of all data fields to be persisted, constructors,
+ * getters, setters and toString() method. It also contains JPA mappings and
+ * persistence annotations to persist table in database.
+ *
  * @author Dell
  */
 @Entity
@@ -34,8 +36,8 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Basket.findBasketByCustomerId", query = "select b from Basket b where b.customer.customerId = :id")
 })
 
-public class Basket 
-{
+public class Basket {
+
     //primary key of table
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -194,14 +196,15 @@ public class Basket
 
     /**
      * helper method to add new product
+     *
      * @param product is new product.
      */
-    public void addProducts(Products product)
-    {
-        if(!this.products.contains(product))
+    public void addProducts(Products product) {
+        if (!this.products.contains(product)) {
             this.products.add(product);
+        }
     }
-    
+
     @Override
     public String toString() {
         return "Basket{" + "basketId=" + basketId + ", shoppingDate=" + shoppingDate + ", numberOfItems=" + numberOfItems + ", pricePerUnit=" + pricePerUnit + ", customer=" + customer + '}';
