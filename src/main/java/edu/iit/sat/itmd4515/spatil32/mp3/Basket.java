@@ -8,6 +8,7 @@ package edu.iit.sat.itmd4515.spatil32.mp3;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
